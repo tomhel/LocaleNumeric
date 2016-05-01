@@ -70,6 +70,8 @@ instance.format(9999.99, 0, 0); // 10 000
 
 Get country ISO2 code.
 
+__returns__ the code.
+
 ### Get Language code
 
 ```
@@ -77,6 +79,8 @@ Get country ISO2 code.
 ```
 
 Get language ISO2 code.
+
+__returns__ the code.
 
 ### Get variant code
 
@@ -86,6 +90,8 @@ Get language ISO2 code.
 
 Get variant code.
 
+__returns__ the code.
+
 ### Get Country display name
 
 ```
@@ -93,6 +99,8 @@ Get variant code.
 ```
 
 Get country name.
+
+__returns__ the name.
 
 ### Get Language display name
 
@@ -102,6 +110,8 @@ Get country name.
 
 Get language name.
 
+__returns__ the name.
+
 ### Get variant display name
 
 ```
@@ -109,6 +119,8 @@ Get language name.
 ```
 
 Get variant name.
+
+__returns__ the name.
 
 ### Get Country ISO3 code
 
@@ -118,6 +130,8 @@ Get variant name.
 
 Get Language ISO3 code.
 
+__returns__ the code.
+
 ### Get Language ISO3 code
 
 ```
@@ -126,6 +140,7 @@ Get Language ISO3 code.
 
 Get language ISO3 code.
 
+__returns__ the code.
 
 
 ##Advanced API
