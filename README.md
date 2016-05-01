@@ -38,14 +38,14 @@ var instance = new Digits("sv_SE");
 ###Format
 
 ```
-<instance>.format(number, min_fraction_digits, max_fraction_digits)
+<instance>.format(number, minFractionDigits, maxFractionDigits)
 ```
 
 Format a number. 
 
 - _number_ - the number to format
-- _max_fraction_digits_ - optional. minimum number of fractions
-- _max_fraction_digits_ - optional. maximum number of fractions
+- _maxFractionDigits_ - optional. minimum number of fractions
+- _maxFractionDigits_ - optional. maximum number of fractions
 
 returns the formatted number.
 
@@ -123,7 +123,7 @@ Get language ISO3 code.
 
 ##Advanced API
 
-###Locale factory method.
+###Locale factory method
 
 ```
 Digits.localeFactory(language, country, variant, languageISO3, 
@@ -135,7 +135,7 @@ Digits.localeFactory(language, country, variant, languageISO3,
 		infinity, roundingMode, digitArray);
 ```
 
-Factory method to create a custom locales
+Factory method to create a custom locale
 
 - _language_ - ISO2 language code
 - _country_ - ISO2 country code
@@ -211,3 +211,20 @@ This method must be called before creating any Digits objects.
 Digits.useISO3();
 var digits = Digits("swe_SWE"); //ISO3 code
 ```
+
+###Rounding modes
+
+```
+Digits.roundHalfTowardsInfinity(number)
+Digits.roundHalfTowardsZero(number)
+Digits.roundHalfUp(number)
+Digits.roundHalfDown(number)
+Digits.roundHalfToEven(number)
+Digits.roundHalfToOdd(number)
+```
+
+These rounding methods can be used when defining custom locales.
+
+- _number_ - the number to round
+
+returns the rounded number.
