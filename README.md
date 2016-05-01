@@ -4,19 +4,18 @@ Format numbers to 151 different locales in JavaScript. Besides number formatting
 It is very simple to use, watch:
 
 ```javascript
-var digits;
 
-digits = new Digits("en_US");            // US
-debug.log(digits.format(42));            //prints 42
-debug.log(digits.format(42.23));         //prints 42.23;
-debug.log(digits.format(42000));         //prints 42,000;
-debug.log(digits.format(9999.99, 0, 0)); //prints 10,000;
+digits = new Digits("en_US");             // US
+formatted = digits.format(42);            //formatted = 42
+formatted = digits.format(42.23);         //formatted = 42.23;
+formatted = digits.format(42000);         //formatted = 42,000;
+formatted = digits.format(9999.99, 0, 0); //formatted = 10,000;
 
-digits = new Digits("sv_SE");            // Sweden
-debug.log(digits.format(42));            //prints 42
-debug.log(digits.format(42.23));         //prints 42,23;
-debug.log(digits.format(42000));         //prints 42 000;
-debug.log(digits.format(9999.99, 0, 0)); //prints 10 000;
+digits = new Digits("sv_SE");             // Sweden
+formatted = digits.format(42);            //formatted = 42
+formatted = digits.format(42.23);         //formatted = 42,23;
+formatted = digits.format(42000);         //formatted = 42 000;
+formatted = digits.format(9999.99, 0, 0); //formatted = 10 000;
 ```
 
 ##API
@@ -230,3 +229,8 @@ These rounding methods can be used when defining custom locales.
 - _number_ - the number to round
 
 __returns__ the rounded number.
+
+
+##Unit tests
+
+This framework is tested using QUnit. The tests can be found in the _tests_ directory.
