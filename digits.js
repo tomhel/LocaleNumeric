@@ -1,46 +1,34 @@
-/******************************************************************************
- *
- * Copyright (c) 2016, Tommy Hellstrom
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2016 Tommy Hellstrom
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  *
  ******************************************************************************
  *
+ * digits.js - format numbers according to locale
+ *
  * Author: Tommy Hellstrom
+ * Version: development
  *
- * Name: digits.js
- *
- * Version: 1.0
- *
- * Description:
- *   digits.js provides functionality to format numbers according to 
- *   locale.
- *
- * Changelog:
- *   1.0 (20160501)
- *     - First release.
- *
- *****************************************************************************/
+ */
 
 /**
  * Constructor. 
@@ -321,6 +309,20 @@ Digits.setFallbackLocale = function(localeObject) {
 };
 
 /**
+ * Use ISO2 codes when creating new Digits objects (default).
+ */
+Digits.useISO2 = function() {
+	Digits.indexingMethod = Digits.indexByISO2;
+};
+
+/**
+ * Use ISO3 codes when creating new Digits objects.
+ */
+Digits.useISO3 = function() {
+	Digits.indexingMethod = Digits.indexByISO3;
+};
+
+/**
  * Wrapper function used externally to define new locales; 
  */
 Digits.define = function(localeObject, optional_isSkipValidation) {
@@ -572,7 +574,7 @@ Digits.locales = function() {
 		define(Digits.localeFactory("hi", "IN", "", "hin", "IND", "Hindi", "India", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, ["\u0966","\u0967","\u0968","\u0969","\u096a","\u096b","\u096c","\u096d","\u096e","\u096f"]), true);
 		define(Digits.localeFactory("th", "TH", "TH", "tha", "THA", "Thai", "Thailand", "TH", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, ["\u0e50","\u0e51","\u0e52","\u0e53","\u0e54","\u0e55","\u0e56","\u0e57","\u0e58","\u0e59"]), true);
 		var locale_en_US = Digits.localeFactory("en", "US", "", "eng", "USA", "English", "United States", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
-		define(locale_en_US);
+		define(locale_en_US, true);
 		if (Digits.fallbackLocaleCode === undefined || Digits.fallbackLocaleCode === null) {
 			//set fallback locale to English, USA.
 			Digits.setFallbackLocale(locale_en_US);

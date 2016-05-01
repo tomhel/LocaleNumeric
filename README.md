@@ -191,19 +191,19 @@ var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Swed
 ###Locale define
 
 ```
-Digits.define(locale, validate);
+Digits.define(locale, skipValidation);
 ```
 
 Add a new locale.
 
 - _locale_ - the locale to add.
-- _validate_ - optional. Validate the new locale. Default is false.
+- _skipValidation_ - optional. Skip locale validation. Default is false.
 
 __returns__ 0 on success, 1 on failure.
 
 ```javascript
 var locale = Digits.localeFactory(...);
-Digits.define(locale, true);
+Digits.define(locale);
 ```
 
 ###Set fallback locale
