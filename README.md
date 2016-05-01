@@ -28,7 +28,7 @@ This framework is tested using QUnit. The tests can be found in the _tests_ dire
 
 ##API
 
-###Constructor
+###Create digit object
 
 ```
 Digits(code)
@@ -42,7 +42,7 @@ Create an instance by passing an ISO2 language and country code.
 var instance = new Digits("sv_SE");
 ```
 
-###Format
+###Format number
 
 ```
 <instance>.format(number, minFractionDigits, maxFractionDigits)
