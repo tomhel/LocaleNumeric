@@ -22,6 +22,10 @@ formatted = digits.format(9999.99, 0, 0); //formatted = 10 000;
 
 MIT
 
+##Unit tests
+
+This framework is tested using QUnit. The tests can be found in the _tests_ directory.
+
 ##API
 
 ###Constructor
@@ -233,8 +237,3 @@ These rounding methods can be used when defining custom locales.
 - _number_ - the number to round
 
 __returns__ the rounded number.
-
-
-##Unit tests
-
-This framework is tested using QUnit. The tests can be found in the _tests_ directory.
