@@ -51,8 +51,8 @@ var instance = new Digits("sv_SE");
 Format a number. 
 
 - _number_ - the number to format
-- _maxFractionDigits_ - optional. minimum number of fractions
-- _maxFractionDigits_ - optional. maximum number of fractions
+- _maxFractionDigits_ - optional. minimum number of fractions. If not given locale default are used
+- _maxFractionDigits_ - optional. maximum number of fractions. If not given locale default are used
 
 __returns__ the formatted number.
 
