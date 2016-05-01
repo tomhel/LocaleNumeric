@@ -47,7 +47,7 @@ Format a number.
 - _maxFractionDigits_ - optional. minimum number of fractions
 - _maxFractionDigits_ - optional. maximum number of fractions
 
-returns the formatted number.
+__returns__ the formatted number.
 
 ```javascript
 var instance = new Digits("sv_SE");
@@ -160,6 +160,8 @@ Factory method to create a custom locale
 - _roundingMode_ - rounding mode function.
 - _digitArray_ - How to represent the digits 0-9 as text.
 
+__returns__ the new locale
+
 ```javascript
 var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
 ```
@@ -175,7 +177,7 @@ Add a new locale.
 - _locale_ - the locale to add.
 - _validate_ - optional. Validate the new locale. Default is false.
 
-returns 0 on success, 1 on failure.
+__returns__ 0 on success, 1 on failure.
 
 ```javascript
 var locale = Digits.localeFactory(...);
@@ -191,7 +193,7 @@ Digits.setFallbackLocale(locale);
 The fallback locale will be used if language and country code is unknown when calling the _Digits(code)_ constructor
 Default fallback locale is en_US
 
-_locale_ - the locale to use as fallback
+- _locale_ - the locale to use as fallback
 
 ```javascript
 var fallback = Digits("sv_SE");
@@ -227,4 +229,4 @@ These rounding methods can be used when defining custom locales.
 
 - _number_ - the number to round
 
-returns the rounded number.
+__returns__ the rounded number.
