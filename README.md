@@ -18,6 +18,10 @@ formatted = digits.format(42000);         //formatted = 42 000;
 formatted = digits.format(9999.99, 0, 0); //formatted = 10 000;
 ```
 
+##License
+
+MIT
+
 ##API
 
 ###Constructor
