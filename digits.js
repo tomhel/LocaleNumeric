@@ -300,6 +300,22 @@ Digits.isAutoDefineEnabled = true;
 /* Fallback locale string. Defaults to "en_US" for ISO2, "eng_USA" for ISO3. */
 Digits.fallbackLocaleCode = undefined;
 
+
+/**
+ * Do not load any locales.
+ * Every locale must be created and loaded manually.
+ */
+Digits.disableAutoDefine = function() {
+	Digits.isAutoDefineEnabled = false;
+};
+
+/**
+ * Load all locales automatically. This is default behaviour.
+ */
+Digits.enableAutoDefine = function() {
+	Digits.isAutoDefineEnabled = true;
+};
+
 /**
  * Set the fallback locale. 
  * This locale will be used if requested locale does not exist.
@@ -738,6 +754,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		
 		//number might have changed after rounding.
 		numString = String(preparedNumber);
+		decimalSymbolIndex = numString.indexOf(".");
 	}
 	
 	var zeroPaddedFractionPart = "";
@@ -777,16 +794,17 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		
 		//check if rounding has overflowed to one whole (1).
 		if(fractionIntString.length > precision) {
-		    //add overflow.
+			//add overflow.
 			preparedNumber++;
 			numString = String(preparedNumber);
+			decimalSymbolIndex = numString.indexOf(".");
 			
 			//pad precision
 			for(var i = 0; i < precision; i++) {
 				fractionPart += "0";
 			}
 		} else {
-		    //no owerflow.
+			//no owerflow.
 			//add leading zeros if needed.
 			if(fractionIntString.length < precision) {
 				for(var i = 0; i < leadingZeros && i < precision - 1; i++) {

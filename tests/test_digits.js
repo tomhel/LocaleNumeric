@@ -212,6 +212,11 @@ QUnit.test("format sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(7.54, 0, 0), "8");
 	assert.equal(digits.format(7.54, 3, 3), "7,540");
 
+	assert.equal(digits.format(9.54), "9,54");
+	assert.equal(digits.format(9.54, 1, 1), "9,5");
+	assert.equal(digits.format(9.54, 0, 0), "10");
+	assert.equal(digits.format(9.54, 3, 3), "9,540");
+
 	assert.equal(digits.format(10.43), "10,43");
 	assert.equal(digits.format(10.43, 1, 1), "10,4");
 	assert.equal(digits.format(10.43, 0, 0), "10");
@@ -232,6 +237,28 @@ QUnit.test("format sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(-100000.43), "-100\u00a0000,43");
 	assert.equal(digits.format(-100000.43, 3, 3), "-100\u00a0000,430");
 	assert.equal(digits.format(-100000000.43), "-100\u00a0000\u00a0000,43");
+
+	assert.equal(digits.format(42), "42");
+	assert.equal(digits.format(42.23), "42,23");
+	assert.equal(digits.format(42000), "42\u00a0000");
+	assert.equal(digits.format(9999.99, 0, 0), "10\u00a0000");
+	assert.equal(digits.format(9999.99, 1, 1), "10\u00a0000,0");
+	assert.equal(digits.format(10000.1, 0, 0), "10\u00a0000");
+	assert.equal(digits.format(10000.15, 1, 1), "10\u00a0000,2");
+	assert.equal(digits.format(10000.14, 1, 1), "10\u00a0000,1");
+	assert.equal(digits.format(10000.25, 1, 1), "10\u00a0000,2");
+	assert.equal(digits.format(10000.255, 1, 1), "10\u00a0000,3");
+
+	assert.equal(digits.format(-42), "-42");
+	assert.equal(digits.format(-42.23), "-42,23");
+	assert.equal(digits.format(-42000), "-42\u00a0000");
+	assert.equal(digits.format(-9999.99, 0, 0), "-10\u00a0000");
+	assert.equal(digits.format(-9999.99, 1, 1), "-10\u00a0000,0");
+	assert.equal(digits.format(-10000.1, 0, 0), "-10\u00a0000");
+	assert.equal(digits.format(-10000.15, 1, 1), "-10\u00a0000,2");
+	assert.equal(digits.format(-10000.14, 1, 1), "-10\u00a0000,1");
+	assert.equal(digits.format(-10000.25, 1, 1), "-10\u00a0000,2");
+	assert.equal(digits.format(-10000.255, 1, 1), "-10\u00a0000,3");
 });
 
 QUnit.test("format en_US (United States)", function(assert) {
@@ -268,6 +295,11 @@ QUnit.test("format en_US (United States)", function(assert) {
 	assert.equal(digits.format(7.54, 0, 0), "8");
 	assert.equal(digits.format(7.54, 3, 3), "7.540");
 
+	assert.equal(digits.format(9.54), "9.54");
+	assert.equal(digits.format(9.54, 1, 1), "9.5");
+	assert.equal(digits.format(9.54, 0, 0), "10");
+	assert.equal(digits.format(9.54, 3, 3), "9.540");
+
 	assert.equal(digits.format(10.43), "10.43");
 	assert.equal(digits.format(10.43, 1, 1), "10.4");
 	assert.equal(digits.format(10.43, 0, 0), "10");
@@ -288,6 +320,28 @@ QUnit.test("format en_US (United States)", function(assert) {
 	assert.equal(digits.format(-100000.43), "-100,000.43");
 	assert.equal(digits.format(-100000.43, 3, 3), "-100,000.430");
 	assert.equal(digits.format(-100000000.43, 3, 3), "-100,000,000.430");
+
+	assert.equal(digits.format(42), "42");
+	assert.equal(digits.format(42.23), "42.23");
+	assert.equal(digits.format(42000), "42,000");
+	assert.equal(digits.format(9999.99, 0, 0), "10,000");
+	assert.equal(digits.format(9999.99, 1, 1), "10,000.0");
+	assert.equal(digits.format(10000.1, 0, 0), "10,000");
+	assert.equal(digits.format(10000.15, 1, 1), "10,000.2");
+	assert.equal(digits.format(10000.14, 1, 1), "10,000.1");
+	assert.equal(digits.format(10000.25, 1, 1), "10,000.2");
+	assert.equal(digits.format(10000.255, 1, 1), "10,000.3");
+
+	assert.equal(digits.format(-42), "-42");
+	assert.equal(digits.format(-42.23), "-42.23");
+	assert.equal(digits.format(-42000), "-42,000");
+	assert.equal(digits.format(-9999.99, 0, 0), "-10,000");
+	assert.equal(digits.format(-9999.99, 1, 1), "-10,000.0");
+	assert.equal(digits.format(-10000.1, 0, 0), "-10,000");
+	assert.equal(digits.format(-10000.15, 1, 1), "-10,000.2");
+	assert.equal(digits.format(-10000.14, 1, 1), "-10,000.1");
+	assert.equal(digits.format(-10000.25, 1, 1), "-10,000.2");
+	assert.equal(digits.format(-10000.255, 1, 1), "-10,000.3");
 });
 
 QUnit.test("format ar_EG (Egypt)", function(assert) {
@@ -324,6 +378,11 @@ QUnit.test("format ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(7.54, 0, 0), "8");
 	assert.equal(digits.format(7.54, 3, 3), "7.540");
 
+	assert.equal(digits.format(9.54), "9.54");
+	assert.equal(digits.format(9.54, 1, 1), "9.5");
+	assert.equal(digits.format(9.54, 0, 0), "10");
+	assert.equal(digits.format(9.54, 3, 3), "9.540");
+
 	assert.equal(digits.format(10.43), "10.43");
 	assert.equal(digits.format(10.43, 1, 1), "10.4");
 	assert.equal(digits.format(10.43, 0, 0), "10");
@@ -344,6 +403,28 @@ QUnit.test("format ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(-100000.43), "100,000.43-");
 	assert.equal(digits.format(-100000.43, 3, 3), "100,000.430-");
 	assert.equal(digits.format(-100000000.43, 3, 3), "100,000,000.430-");
+
+	assert.equal(digits.format(42), "42");
+	assert.equal(digits.format(42.23), "42.23");
+	assert.equal(digits.format(42000), "42,000");
+	assert.equal(digits.format(9999.99, 0, 0), "10,000");
+	assert.equal(digits.format(9999.99, 1, 1), "10,000.0");
+	assert.equal(digits.format(10000.1, 0, 0), "10,000");
+	assert.equal(digits.format(10000.15, 1, 1), "10,000.2");
+	assert.equal(digits.format(10000.14, 1, 1), "10,000.1");
+	assert.equal(digits.format(10000.25, 1, 1), "10,000.2");
+	assert.equal(digits.format(10000.255, 1, 1), "10,000.3");
+
+	assert.equal(digits.format(-42), "42-");
+	assert.equal(digits.format(-42.23), "42.23-");
+	assert.equal(digits.format(-42000), "42,000-");
+	assert.equal(digits.format(-9999.99, 0, 0), "10,000-");
+	assert.equal(digits.format(-9999.99, 1, 1), "10,000.0-");
+	assert.equal(digits.format(-10000.1, 0, 0), "10,000-");
+	assert.equal(digits.format(-10000.15, 1, 1), "10,000.2-");
+	assert.equal(digits.format(-10000.14, 1, 1), "10,000.1-");
+	assert.equal(digits.format(-10000.25, 1, 1), "10,000.2-");
+	assert.equal(digits.format(-10000.255, 1, 1), "10,000.3-");
 });
 
 QUnit.test("getDisplayCountry sv_SE (Sweden)", function(assert) {
