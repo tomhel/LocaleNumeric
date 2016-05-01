@@ -43,6 +43,7 @@ var instance = new Digits("sv_SE");
 
 Format a number. 
 
+- _number_ - the number to format
 - _max_fraction_digits_ - optional. minimum number of fractions
 - _max_fraction_digits_ - optional. maximum number of fractions
 
@@ -54,13 +55,13 @@ instance.format(9999.99);       // 9999,99
 instance.format(9999.99, 0, 0); // 10 000
 ```
 
-### Get Country ISO2 code
+### Get Country code
 
 ```
 <instance>.getCountry()
 ```
 
-Get country code.
+Get country ISO2 code.
 
 ### Get Language code
 
@@ -108,7 +109,7 @@ Get variant name.
 <instance>.getCountryISO3()
 ```
 
-Get country ISO3 code.
+Get Language ISO3 code.
 
 ### Get Language ISO3 code
 
@@ -118,9 +119,11 @@ Get country ISO3 code.
 
 Get language ISO3 code.
 
+
+
 ##Advanced API
 
-###Locale factory
+###Locale factory method.
 
 ```
 Digits.localeFactory(language, country, variant, languageISO3, 
@@ -132,10 +135,33 @@ Digits.localeFactory(language, country, variant, languageISO3,
 		infinity, roundingMode, digitArray);
 ```
 
-Factory method to create a new locale
+Factory method to create a custom locales
+
+- _language_ - ISO2 language code
+- _country_ - ISO2 country code
+- _variant_ - variant code
+- _languageISO3_ - ISO3 language code
+- _countryISO3_ - ISO3 country code
+- _displayLanguage_ - language name
+- _displayCountry_ - country name
+- _displayVariant_ - variant name
+- _decimalSymbol_ - the decimal symbol
+- _groupSymbol_ - the group symbol (thousand separator)
+- _minFractionDigits_ - minimum number of fraction digits. Used as default by Digits objects.
+- _maxFractionDigits_ - maximum number of fraction digits. Used as default by Digits objects.
+- _groupingArray_ - defines how to group/seperate digits.
+- _isLeadingDecimalZero_ - have leading decimal zero. Example, 0.75 or .75
+- _isAlwaysShowDecimalSymbol_ - always have decimal symbol
+- _negativeNumberFormat_ - negative number format. Example, prefix with minus sign -#
+- _positiveNumberFormat_ - positive number format.
+- _zeroNumberFormat_ - zero number format.
+- _nAn_ - value for not-a-number
+- _infinity_ - value for infinity
+- _roundingMode_ - rounding mode function.
+- _digitArray_ - How to represent the digits 0-9 as text.
 
 ```javascript
-var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true,              false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
+var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
 ```
 
 ###Locale define
@@ -178,7 +204,7 @@ Digits.setFallbackLocale(fallback.locale);
 Digits.useISO3()
 ```
 
-Digits object are instanciated using ISO2 codes by default. This can be changed to ISO3 codes.
+Digits object are instantiated using ISO2 codes by default. This can be changed to ISO3 codes.
 This method must be called before creating any Digits objects.
 
 ```javascript
