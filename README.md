@@ -228,7 +228,7 @@ Digits.setFallbackLocale(fallback.locale);
 Digits.useISO3()
 ```
 
-Digits object are instantiated using ISO2 codes by default. This can be changed to ISO3 codes.
+Digits objects are instantiated using ISO2 codes by default. This can be changed to ISO3 codes.
 This method must be called before creating any Digits objects.
 
 ```javascript
