@@ -6,16 +6,17 @@ It is very simple to use, watch:
 ```javascript
 var digits;
 
-digits = new Digits("en_US");          // US
-debug.log(digits.format(42));          //prints 42
-debug.log(digits.format(42.23));       //prints 42.23;
-debug.log(digits.format(42000));       //prints 42,000;
+digits = new Digits("en_US");            // US
+debug.log(digits.format(42));            //prints 42
+debug.log(digits.format(42.23));         //prints 42.23;
+debug.log(digits.format(42000));         //prints 42,000;
+debug.log(digits.format(9999.99, 0, 0)); //prints 10,000;
 
-digits = new Digits("sv_SE");          // Sweden
-debug.log(digits.format(42));          //prints 42
-debug.log(digits.format(42.23));       //prints 42,23;
-debug.log(digits.format(42000));       //prints 42 000;
-
+digits = new Digits("sv_SE");            // Sweden
+debug.log(digits.format(42));            //prints 42
+debug.log(digits.format(42.23));         //prints 42,23;
+debug.log(digits.format(42000));         //prints 42 000;
+debug.log(digits.format(9999.99, 0, 0)); //prints 10 000;
 ```
 
 ##API
@@ -34,8 +35,7 @@ var instance = new Digits("sv_SE");
 
 ###Format
 
-Format a number. 
-min_fraction_digits and max_fraction_digits are optional.
+Format a number. __min_fraction_digits__ and __max_fraction_digits__ are optional.
 
 ```
 <instance>.format(number, min_fraction_digits, max_fraction_digits)
@@ -43,8 +43,8 @@ min_fraction_digits and max_fraction_digits are optional.
 
 ```javascript
 var instance = new Digits("sv_SE");
-instance.format(9999.99);
-instance.format(9999.99, 0, 0);
+instance.format(9999.99);       // 9999,99
+instance.format(9999.99, 0, 0); // 10 000
 ```
 
 ### Get Country ISO2 code
