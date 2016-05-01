@@ -236,6 +236,22 @@ Digits.useISO3();
 var digits = Digits("swe_SWE"); //ISO3 code
 ```
 
+###Disable auto define
+
+```
+Digits.disableAutoDefine()
+```
+
+Disable auto define of locales. Auto define is enabled by default. If auto define is disabled all locales to be used must be created and added manually. Fallback locale must also be set manually.
+This method must be called before creating any Digits objects.
+
+```javascript
+Digits.disableAutoDefine();
+Digits.define(Digits.localeFactory(...));
+Digits.setFallbackLocale(Digits.localeFactory(...));
+var digits = Digits("xx_YY");
+```
+
 ###Rounding modes
 
 ```
