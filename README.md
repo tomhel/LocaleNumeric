@@ -36,7 +36,7 @@ Examples on how to use digits.js are in the _examples_ directory.
 
 ##API
 
-###Create digit instance
+###Create a Digits instance
 
 ```
 new Digits(code)
