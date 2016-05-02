@@ -256,7 +256,7 @@ Add a new locale.
 - _locale_ - the locale to add
 - _skipValidation_ - optional. Skip locale validation. Default is false
 
-__returns__ 0 on success, 1 on failure
+__returns__ _true_ on success, _false_ on failure
 
 ```javascript
 var locale = Digits.localeFactory(...);
