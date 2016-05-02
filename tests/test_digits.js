@@ -178,16 +178,58 @@ QUnit.test("roundHalfToOdd", function(assert) {
 	assert.equal(Digits.roundHalfToOdd(-10.4), -10);
 });
 
-QUnit.test("format sv_SE (Sweden)", function(assert) {
+QUnit.test("format NaN & Infinity sv_SE (Sweden)", function(assert) {
 	var digits = new Digits("sv_SE");
-
 	assert.equal(digits.format(Infinity), "\u221e");
 	assert.equal(digits.format(NaN), "\ufffd");
+});
 
+QUnit.test("format positive number sv_SE (Sweden)", function(assert) {
+	var digits = new Digits("sv_SE");
 	assert.equal(digits.format(0), "0");
 	assert.equal(digits.format(0, 1, 1), "0,0");
 	assert.equal(digits.format(0, 0, 0), "0");
 	assert.equal(digits.format(0, 3, 3), "0,000");
+
+	assert.equal(digits.format(0.123456), "0,123");
+	assert.equal(digits.format(0.123456, 1, 1), "0,1");
+	assert.equal(digits.format(0.123456, 2, 2), "0,12");
+	assert.equal(digits.format(0.123456, 3, 3), "0,123");
+	assert.equal(digits.format(0.123456, 4, 4), "0,1235");
+	assert.equal(digits.format(0.123456, 5, 5), "0,12346");
+	assert.equal(digits.format(0.123456, 6, 6), "0,123456");
+
+	assert.equal(digits.format(0.654321), "0,654");
+	assert.equal(digits.format(0.654321, 1, 1), "0,7");
+	assert.equal(digits.format(0.654321, 2, 2), "0,65");
+	assert.equal(digits.format(0.654321, 3, 3), "0,654");
+	assert.equal(digits.format(0.654321, 4, 4), "0,6543");
+	assert.equal(digits.format(0.654321, 5, 5), "0,65432");
+	assert.equal(digits.format(0.654321, 6, 6), "0,654321");
+
+	assert.equal(digits.format(0.999999), "1,000");
+	assert.equal(digits.format(0.999999, 1, 1), "1,0");
+	assert.equal(digits.format(0.999999, 2, 2), "1,00");
+	assert.equal(digits.format(0.999999, 3, 3), "1,000");
+	assert.equal(digits.format(0.999999, 4, 4), "1,0000");
+	assert.equal(digits.format(0.999999, 5, 5), "1,00000");
+	assert.equal(digits.format(0.999999, 6, 6), "0,999999");
+	assert.equal(digits.format(0.999999, 7, 7), "0,9999990");
+
+	assert.equal(digits.format(9.98, 0, 0), "10");
+	assert.equal(digits.format(9.98, 1, 1), "10,0");
+	assert.equal(digits.format(9.98, 2, 2), "9,98");
+	assert.equal(digits.format(9.98, 3, 3), "9,980");
+
+	assert.equal(digits.format(99.98, 0, 0), "100");
+	assert.equal(digits.format(99.98, 1, 1), "100,0");
+	assert.equal(digits.format(99.98, 2, 2), "99,98");
+	assert.equal(digits.format(99.98, 3, 3), "99,980");
+
+	assert.equal(digits.format(9999.98, 0, 0), "10\u00a0000");
+	assert.equal(digits.format(99999.98, 1, 1), "100\u00a0000,0");
+	assert.equal(digits.format(999999.98, 2, 2), "999\u00a0999,98");
+	assert.equal(digits.format(9999999.98, 3, 3), "9\u00a0999\u00a0999,980");
 
 	assert.equal(digits.format(0.65), "0,65");
 	assert.equal(digits.format(0.65, 1, 1), "0,6");
@@ -222,21 +264,11 @@ QUnit.test("format sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(10.43, 0, 0), "10");
 	assert.equal(digits.format(10.43, 3, 3), "10,430");
 
-	assert.equal(digits.format(-10.43), "-10,43");
-	assert.equal(digits.format(-10.43, 1, 1), "-10,4");
-	assert.equal(digits.format(-10.43, 0, 0), "-10");
-	assert.equal(digits.format(-10.43, 3, 3), "-10,430");
-
 	assert.equal(digits.format(100.43), "100,43");
 	assert.equal(digits.format(1000.43), "1\u00a0000,43");
 	assert.equal(digits.format(100000.43), "100\u00a0000,43");
+	assert.equal(digits.format(100000.43, 3, 3), "100\u00a0000,430");
 	assert.equal(digits.format(100000000.43), "100\u00a0000\u00a0000,43");
-
-	assert.equal(digits.format(-100.43), "-100,43");
-	assert.equal(digits.format(-1000.43), "-1\u00a0000,43");
-	assert.equal(digits.format(-100000.43), "-100\u00a0000,43");
-	assert.equal(digits.format(-100000.43, 3, 3), "-100\u00a0000,430");
-	assert.equal(digits.format(-100000000.43), "-100\u00a0000\u00a0000,43");
 
 	assert.equal(digits.format(42), "42");
 	assert.equal(digits.format(42.23), "42,23");
@@ -248,6 +280,89 @@ QUnit.test("format sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(10000.14, 1, 1), "10\u00a0000,1");
 	assert.equal(digits.format(10000.25, 1, 1), "10\u00a0000,2");
 	assert.equal(digits.format(10000.255, 1, 1), "10\u00a0000,3");
+});
+
+QUnit.test("format negative number sv_SE (Sweden)", function(assert) {
+	var digits = new Digits("sv_SE");
+
+	assert.equal(digits.format(-0.123456), "-0,123");
+	assert.equal(digits.format(-0.123456, 1, 1), "-0,1");
+	assert.equal(digits.format(-0.123456, 2, 2), "-0,12");
+	assert.equal(digits.format(-0.123456, 3, 3), "-0,123");
+	assert.equal(digits.format(-0.123456, 4, 4), "-0,1235");
+	assert.equal(digits.format(-0.123456, 5, 5), "-0,12346");
+	assert.equal(digits.format(-0.123456, 6, 6), "-0,123456");
+
+	assert.equal(digits.format(-0.654321), "-0,654");
+	assert.equal(digits.format(-0.654321, 1, 1), "-0,7");
+	assert.equal(digits.format(-0.654321, 2, 2), "-0,65");
+	assert.equal(digits.format(-0.654321, 3, 3), "-0,654");
+	assert.equal(digits.format(-0.654321, 4, 4), "-0,6543");
+	assert.equal(digits.format(-0.654321, 5, 5), "-0,65432");
+	assert.equal(digits.format(-0.654321, 6, 6), "-0,654321");
+
+	assert.equal(digits.format(-0.999999), "-1,000");
+	assert.equal(digits.format(-0.999999, 1, 1), "-1,0");
+	assert.equal(digits.format(-0.999999, 2, 2), "-1,00");
+	assert.equal(digits.format(-0.999999, 3, 3), "-1,000");
+	assert.equal(digits.format(-0.999999, 4, 4), "-1,0000");
+	assert.equal(digits.format(-0.999999, 5, 5), "-1,00000");
+	assert.equal(digits.format(-0.999999, 6, 6), "-0,999999");
+	assert.equal(digits.format(-0.999999, 7, 7), "-0,9999990");
+
+	assert.equal(digits.format(-9.98, 0, 0), "-10");
+	assert.equal(digits.format(-9.98, 1, 1), "-10,0");
+	assert.equal(digits.format(-9.98, 2, 2), "-9,98");
+	assert.equal(digits.format(-9.98, 3, 3), "-9,980");
+
+	assert.equal(digits.format(-99.98, 0, 0), "-100");
+	assert.equal(digits.format(-99.98, 1, 1), "-100,0");
+	assert.equal(digits.format(-99.98, 2, 2), "-99,98");
+	assert.equal(digits.format(-99.98, 3, 3), "-99,980");
+
+	assert.equal(digits.format(-9999.98, 0, 0), "-10\u00a0000");
+	assert.equal(digits.format(-99999.98, 1, 1), "-100\u00a0000,0");
+	assert.equal(digits.format(-999999.98, 2, 2), "-999\u00a0999,98");
+	assert.equal(digits.format(-9999999.98, 3, 3), "-9\u00a0999\u00a0999,980");
+
+	assert.equal(digits.format(-0.65), "-0,65");
+	assert.equal(digits.format(-0.65, 1, 1), "-0,6");
+	assert.equal(digits.format(-0.65, 0, 0), "-1");
+	assert.equal(digits.format(-0.65, 3, 3), "-0,650");
+
+	assert.equal(digits.format(-0.75), "-0,75");
+	assert.equal(digits.format(-0.75, 1, 1), "-0,8");
+	assert.equal(digits.format(-0.75, 0, 0), "-1");
+	assert.equal(digits.format(-0.75, 3, 3), "-0,750");
+
+	assert.equal(digits.format(-1.6421), "-1,642");
+	assert.equal(digits.format(-1.6421, 1, 1), "-1,6");
+	assert.equal(digits.format(-1.6421, 0, 0), "-2");
+	assert.equal(digits.format(-1.6421, 3, 3), "-1,642");
+	assert.equal(digits.format(-1.6421, 0, 4), "-1,6421");
+	assert.equal(digits.format(-1.6421, 0, 5), "-1,6421");
+	assert.equal(digits.format(-1.6421, 5, 5), "-1,64210");
+
+	assert.equal(digits.format(-7.54), "-7,54");
+	assert.equal(digits.format(-7.54, 1, 1), "-7,5");
+	assert.equal(digits.format(-7.54, 0, 0), "-8");
+	assert.equal(digits.format(-7.54, 3, 3), "-7,540");
+
+	assert.equal(digits.format(-9.54), "-9,54");
+	assert.equal(digits.format(-9.54, 1, 1), "-9,5");
+	assert.equal(digits.format(-9.54, 0, 0), "-10");
+	assert.equal(digits.format(-9.54, 3, 3), "-9,540");
+
+	assert.equal(digits.format(-10.43), "-10,43");
+	assert.equal(digits.format(-10.43, 1, 1), "-10,4");
+	assert.equal(digits.format(-10.43, 0, 0), "-10");
+	assert.equal(digits.format(-10.43, 3, 3), "-10,430");
+
+	assert.equal(digits.format(-100.43), "-100,43");
+	assert.equal(digits.format(-1000.43), "-1\u00a0000,43");
+	assert.equal(digits.format(-100000.43), "-100\u00a0000,43");
+	assert.equal(digits.format(-100000.43, 3, 3), "-100\u00a0000,430");
+	assert.equal(digits.format(-100000000.43), "-100\u00a0000\u00a0000,43");
 
 	assert.equal(digits.format(-42), "-42");
 	assert.equal(digits.format(-42.23), "-42,23");
@@ -261,16 +376,58 @@ QUnit.test("format sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(-10000.255, 1, 1), "-10\u00a0000,3");
 });
 
-QUnit.test("format en_US (United States)", function(assert) {
+QUnit.test("format NaN & Infinity en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
-
 	assert.equal(digits.format(Infinity), "\u221e");
 	assert.equal(digits.format(NaN), "\ufffd");
+});
 
+QUnit.test("format positive number en_US (United States)", function(assert) {
+	var digits = new Digits("en_US");
 	assert.equal(digits.format(0), "0");
 	assert.equal(digits.format(0, 1, 1), "0.0");
 	assert.equal(digits.format(0, 0, 0), "0");
 	assert.equal(digits.format(0, 3, 3), "0.000");
+
+	assert.equal(digits.format(0.123456), "0.123");
+	assert.equal(digits.format(0.123456, 1, 1), "0.1");
+	assert.equal(digits.format(0.123456, 2, 2), "0.12");
+	assert.equal(digits.format(0.123456, 3, 3), "0.123");
+	assert.equal(digits.format(0.123456, 4, 4), "0.1235");
+	assert.equal(digits.format(0.123456, 5, 5), "0.12346");
+	assert.equal(digits.format(0.123456, 6, 6), "0.123456");
+
+	assert.equal(digits.format(0.654321), "0.654");
+	assert.equal(digits.format(0.654321, 1, 1), "0.7");
+	assert.equal(digits.format(0.654321, 2, 2), "0.65");
+	assert.equal(digits.format(0.654321, 3, 3), "0.654");
+	assert.equal(digits.format(0.654321, 4, 4), "0.6543");
+	assert.equal(digits.format(0.654321, 5, 5), "0.65432");
+	assert.equal(digits.format(0.654321, 6, 6), "0.654321");
+
+	assert.equal(digits.format(0.999999), "1.000");
+	assert.equal(digits.format(0.999999, 1, 1), "1.0");
+	assert.equal(digits.format(0.999999, 2, 2), "1.00");
+	assert.equal(digits.format(0.999999, 3, 3), "1.000");
+	assert.equal(digits.format(0.999999, 4, 4), "1.0000");
+	assert.equal(digits.format(0.999999, 5, 5), "1.00000");
+	assert.equal(digits.format(0.999999, 6, 6), "0.999999");
+	assert.equal(digits.format(0.999999, 7, 7), "0.9999990");
+
+	assert.equal(digits.format(9.98, 0, 0), "10");
+	assert.equal(digits.format(9.98, 1, 1), "10.0");
+	assert.equal(digits.format(9.98, 2, 2), "9.98");
+	assert.equal(digits.format(9.98, 3, 3), "9.980");
+
+	assert.equal(digits.format(99.98, 0, 0), "100");
+	assert.equal(digits.format(99.98, 1, 1), "100.0");
+	assert.equal(digits.format(99.98, 2, 2), "99.98");
+	assert.equal(digits.format(99.98, 3, 3), "99.980");
+
+	assert.equal(digits.format(9999.98, 0, 0), "10,000");
+	assert.equal(digits.format(99999.98, 1, 1), "100,000.0");
+	assert.equal(digits.format(999999.98, 2, 2), "999,999.98");
+	assert.equal(digits.format(9999999.98, 3, 3), "9,999,999.980");
 
 	assert.equal(digits.format(0.65), "0.65");
 	assert.equal(digits.format(0.65, 1, 1), "0.6");
@@ -305,21 +462,11 @@ QUnit.test("format en_US (United States)", function(assert) {
 	assert.equal(digits.format(10.43, 0, 0), "10");
 	assert.equal(digits.format(10.43, 3, 3), "10.430");
 
-	assert.equal(digits.format(-10.43), "-10.43");
-	assert.equal(digits.format(-10.43, 1, 1), "-10.4");
-	assert.equal(digits.format(-10.43, 0, 0), "-10");
-	assert.equal(digits.format(-10.43, 3, 3), "-10.430");
-
 	assert.equal(digits.format(100.43), "100.43");
 	assert.equal(digits.format(1000.43), "1,000.43");
 	assert.equal(digits.format(100000.43), "100,000.43");
+	assert.equal(digits.format(100000.43, 3, 3), "100,000.430");
 	assert.equal(digits.format(100000000.43), "100,000,000.43");
-
-	assert.equal(digits.format(-100.43), "-100.43");
-	assert.equal(digits.format(-1000.43), "-1,000.43");
-	assert.equal(digits.format(-100000.43), "-100,000.43");
-	assert.equal(digits.format(-100000.43, 3, 3), "-100,000.430");
-	assert.equal(digits.format(-100000000.43, 3, 3), "-100,000,000.430");
 
 	assert.equal(digits.format(42), "42");
 	assert.equal(digits.format(42.23), "42.23");
@@ -331,6 +478,89 @@ QUnit.test("format en_US (United States)", function(assert) {
 	assert.equal(digits.format(10000.14, 1, 1), "10,000.1");
 	assert.equal(digits.format(10000.25, 1, 1), "10,000.2");
 	assert.equal(digits.format(10000.255, 1, 1), "10,000.3");
+});
+
+QUnit.test("format negative number en_US (United States)", function(assert) {
+	var digits = new Digits("en_US");
+
+	assert.equal(digits.format(-0.123456), "-0.123");
+	assert.equal(digits.format(-0.123456, 1, 1), "-0.1");
+	assert.equal(digits.format(-0.123456, 2, 2), "-0.12");
+	assert.equal(digits.format(-0.123456, 3, 3), "-0.123");
+	assert.equal(digits.format(-0.123456, 4, 4), "-0.1235");
+	assert.equal(digits.format(-0.123456, 5, 5), "-0.12346");
+	assert.equal(digits.format(-0.123456, 6, 6), "-0.123456");
+
+	assert.equal(digits.format(-0.654321), "-0.654");
+	assert.equal(digits.format(-0.654321, 1, 1), "-0.7");
+	assert.equal(digits.format(-0.654321, 2, 2), "-0.65");
+	assert.equal(digits.format(-0.654321, 3, 3), "-0.654");
+	assert.equal(digits.format(-0.654321, 4, 4), "-0.6543");
+	assert.equal(digits.format(-0.654321, 5, 5), "-0.65432");
+	assert.equal(digits.format(-0.654321, 6, 6), "-0.654321");
+
+	assert.equal(digits.format(-0.999999), "-1.000");
+	assert.equal(digits.format(-0.999999, 1, 1), "-1.0");
+	assert.equal(digits.format(-0.999999, 2, 2), "-1.00");
+	assert.equal(digits.format(-0.999999, 3, 3), "-1.000");
+	assert.equal(digits.format(-0.999999, 4, 4), "-1.0000");
+	assert.equal(digits.format(-0.999999, 5, 5), "-1.00000");
+	assert.equal(digits.format(-0.999999, 6, 6), "-0.999999");
+	assert.equal(digits.format(-0.999999, 7, 7), "-0.9999990");
+
+	assert.equal(digits.format(-9.98, 0, 0), "-10");
+	assert.equal(digits.format(-9.98, 1, 1), "-10.0");
+	assert.equal(digits.format(-9.98, 2, 2), "-9.98");
+	assert.equal(digits.format(-9.98, 3, 3), "-9.980");
+
+	assert.equal(digits.format(-99.98, 0, 0), "-100");
+	assert.equal(digits.format(-99.98, 1, 1), "-100.0");
+	assert.equal(digits.format(-99.98, 2, 2), "-99.98");
+	assert.equal(digits.format(-99.98, 3, 3), "-99.980");
+
+	assert.equal(digits.format(-9999.98, 0, 0), "-10,000");
+	assert.equal(digits.format(-99999.98, 1, 1), "-100,000.0");
+	assert.equal(digits.format(-999999.98, 2, 2), "-999,999.98");
+	assert.equal(digits.format(-9999999.98, 3, 3), "-9,999,999.980");
+
+	assert.equal(digits.format(-0.65), "-0.65");
+	assert.equal(digits.format(-0.65, 1, 1), "-0.6");
+	assert.equal(digits.format(-0.65, 0, 0), "-1");
+	assert.equal(digits.format(-0.65, 3, 3), "-0.650");
+
+	assert.equal(digits.format(-0.75), "-0.75");
+	assert.equal(digits.format(-0.75, 1, 1), "-0.8");
+	assert.equal(digits.format(-0.75, 0, 0), "-1");
+	assert.equal(digits.format(-0.75, 3, 3), "-0.750");
+
+	assert.equal(digits.format(-1.6421), "-1.642");
+	assert.equal(digits.format(-1.6421, 1, 1), "-1.6");
+	assert.equal(digits.format(-1.6421, 0, 0), "-2");
+	assert.equal(digits.format(-1.6421, 3, 3), "-1.642");
+	assert.equal(digits.format(-1.6421, 0, 4), "-1.6421");
+	assert.equal(digits.format(-1.6421, 0, 5), "-1.6421");
+	assert.equal(digits.format(-1.6421, 5, 5), "-1.64210");
+
+	assert.equal(digits.format(-7.54), "-7.54");
+	assert.equal(digits.format(-7.54, 1, 1), "-7.5");
+	assert.equal(digits.format(-7.54, 0, 0), "-8");
+	assert.equal(digits.format(-7.54, 3, 3), "-7.540");
+
+	assert.equal(digits.format(-9.54), "-9.54");
+	assert.equal(digits.format(-9.54, 1, 1), "-9.5");
+	assert.equal(digits.format(-9.54, 0, 0), "-10");
+	assert.equal(digits.format(-9.54, 3, 3), "-9.540");
+
+	assert.equal(digits.format(-10.43), "-10.43");
+	assert.equal(digits.format(-10.43, 1, 1), "-10.4");
+	assert.equal(digits.format(-10.43, 0, 0), "-10");
+	assert.equal(digits.format(-10.43, 3, 3), "-10.430");
+
+	assert.equal(digits.format(-100.43), "-100.43");
+	assert.equal(digits.format(-1000.43), "-1,000.43");
+	assert.equal(digits.format(-100000.43), "-100,000.43");
+	assert.equal(digits.format(-100000.43, 3, 3), "-100,000.430");
+	assert.equal(digits.format(-100000000.43), "-100,000,000.43");
 
 	assert.equal(digits.format(-42), "-42");
 	assert.equal(digits.format(-42.23), "-42.23");
@@ -344,16 +574,59 @@ QUnit.test("format en_US (United States)", function(assert) {
 	assert.equal(digits.format(-10000.255, 1, 1), "-10,000.3");
 });
 
-QUnit.test("format ar_EG (Egypt)", function(assert) {
+QUnit.test("format NaN & Infinity ar_EG (Egypt)", function(assert) {
 	var digits = new Digits("ar_EG");
-
 	assert.equal(digits.format(Infinity), "\u221e");
 	assert.equal(digits.format(NaN), "\ufffd");
+});
+
+QUnit.test("format positive number ar_EG (Egypt)", function(assert) {
+	var digits = new Digits("ar_EG");
 
 	assert.equal(digits.format(0), "0");
 	assert.equal(digits.format(0, 1, 1), "0.0");
 	assert.equal(digits.format(0, 0, 0), "0");
 	assert.equal(digits.format(0, 3, 3), "0.000");
+
+	assert.equal(digits.format(0.123456), "0.123");
+	assert.equal(digits.format(0.123456, 1, 1), "0.1");
+	assert.equal(digits.format(0.123456, 2, 2), "0.12");
+	assert.equal(digits.format(0.123456, 3, 3), "0.123");
+	assert.equal(digits.format(0.123456, 4, 4), "0.1235");
+	assert.equal(digits.format(0.123456, 5, 5), "0.12346");
+	assert.equal(digits.format(0.123456, 6, 6), "0.123456");
+
+	assert.equal(digits.format(0.654321), "0.654");
+	assert.equal(digits.format(0.654321, 1, 1), "0.7");
+	assert.equal(digits.format(0.654321, 2, 2), "0.65");
+	assert.equal(digits.format(0.654321, 3, 3), "0.654");
+	assert.equal(digits.format(0.654321, 4, 4), "0.6543");
+	assert.equal(digits.format(0.654321, 5, 5), "0.65432");
+	assert.equal(digits.format(0.654321, 6, 6), "0.654321");
+
+	assert.equal(digits.format(0.999999), "1.000");
+	assert.equal(digits.format(0.999999, 1, 1), "1.0");
+	assert.equal(digits.format(0.999999, 2, 2), "1.00");
+	assert.equal(digits.format(0.999999, 3, 3), "1.000");
+	assert.equal(digits.format(0.999999, 4, 4), "1.0000");
+	assert.equal(digits.format(0.999999, 5, 5), "1.00000");
+	assert.equal(digits.format(0.999999, 6, 6), "0.999999");
+	assert.equal(digits.format(0.999999, 7, 7), "0.9999990");
+
+	assert.equal(digits.format(9.98, 0, 0), "10");
+	assert.equal(digits.format(9.98, 1, 1), "10.0");
+	assert.equal(digits.format(9.98, 2, 2), "9.98");
+	assert.equal(digits.format(9.98, 3, 3), "9.980");
+
+	assert.equal(digits.format(99.98, 0, 0), "100");
+	assert.equal(digits.format(99.98, 1, 1), "100.0");
+	assert.equal(digits.format(99.98, 2, 2), "99.98");
+	assert.equal(digits.format(99.98, 3, 3), "99.980");
+
+	assert.equal(digits.format(9999.98, 0, 0), "10,000");
+	assert.equal(digits.format(99999.98, 1, 1), "100,000.0");
+	assert.equal(digits.format(999999.98, 2, 2), "999,999.98");
+	assert.equal(digits.format(9999999.98, 3, 3), "9,999,999.980");
 
 	assert.equal(digits.format(0.65), "0.65");
 	assert.equal(digits.format(0.65, 1, 1), "0.6");
@@ -388,21 +661,11 @@ QUnit.test("format ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(10.43, 0, 0), "10");
 	assert.equal(digits.format(10.43, 3, 3), "10.430");
 
-	assert.equal(digits.format(-10.43), "10.43-");
-	assert.equal(digits.format(-10.43, 1, 1), "10.4-");
-	assert.equal(digits.format(-10.43, 0, 0), "10-");
-	assert.equal(digits.format(-10.43, 3, 3), "10.430-");
-
 	assert.equal(digits.format(100.43), "100.43");
 	assert.equal(digits.format(1000.43), "1,000.43");
 	assert.equal(digits.format(100000.43), "100,000.43");
+	assert.equal(digits.format(100000.43, 3, 3), "100,000.430");
 	assert.equal(digits.format(100000000.43), "100,000,000.43");
-
-	assert.equal(digits.format(-100.43), "100.43-");
-	assert.equal(digits.format(-1000.43), "1,000.43-");
-	assert.equal(digits.format(-100000.43), "100,000.43-");
-	assert.equal(digits.format(-100000.43, 3, 3), "100,000.430-");
-	assert.equal(digits.format(-100000000.43, 3, 3), "100,000,000.430-");
 
 	assert.equal(digits.format(42), "42");
 	assert.equal(digits.format(42.23), "42.23");
@@ -414,6 +677,89 @@ QUnit.test("format ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(10000.14, 1, 1), "10,000.1");
 	assert.equal(digits.format(10000.25, 1, 1), "10,000.2");
 	assert.equal(digits.format(10000.255, 1, 1), "10,000.3");
+});
+
+QUnit.test("format negative number ar_EG (Egypt)", function(assert) {
+	var digits = new Digits("ar_EG");
+
+	assert.equal(digits.format(-0.123456), "0.123-");
+	assert.equal(digits.format(-0.123456, 1, 1), "0.1-");
+	assert.equal(digits.format(-0.123456, 2, 2), "0.12-");
+	assert.equal(digits.format(-0.123456, 3, 3), "0.123-");
+	assert.equal(digits.format(-0.123456, 4, 4), "0.1235-");
+	assert.equal(digits.format(-0.123456, 5, 5), "0.12346-");
+	assert.equal(digits.format(-0.123456, 6, 6), "0.123456-");
+
+	assert.equal(digits.format(-0.654321), "0.654-");
+	assert.equal(digits.format(-0.654321, 1, 1), "0.7-");
+	assert.equal(digits.format(-0.654321, 2, 2), "0.65-");
+	assert.equal(digits.format(-0.654321, 3, 3), "0.654-");
+	assert.equal(digits.format(-0.654321, 4, 4), "0.6543-");
+	assert.equal(digits.format(-0.654321, 5, 5), "0.65432-");
+	assert.equal(digits.format(-0.654321, 6, 6), "0.654321-");
+
+	assert.equal(digits.format(-0.999999), "1.000-");
+	assert.equal(digits.format(-0.999999, 1, 1), "1.0-");
+	assert.equal(digits.format(-0.999999, 2, 2), "1.00-");
+	assert.equal(digits.format(-0.999999, 3, 3), "1.000-");
+	assert.equal(digits.format(-0.999999, 4, 4), "1.0000-");
+	assert.equal(digits.format(-0.999999, 5, 5), "1.00000-");
+	assert.equal(digits.format(-0.999999, 6, 6), "0.999999-");
+	assert.equal(digits.format(-0.999999, 7, 7), "0.9999990-");
+
+	assert.equal(digits.format(-9.98, 0, 0), "10-");
+	assert.equal(digits.format(-9.98, 1, 1), "10.0-");
+	assert.equal(digits.format(-9.98, 2, 2), "9.98-");
+	assert.equal(digits.format(-9.98, 3, 3), "9.980-");
+
+	assert.equal(digits.format(-99.98, 0, 0), "100-");
+	assert.equal(digits.format(-99.98, 1, 1), "100.0-");
+	assert.equal(digits.format(-99.98, 2, 2), "99.98-");
+	assert.equal(digits.format(-99.98, 3, 3), "99.980-");
+
+	assert.equal(digits.format(-9999.98, 0, 0), "10,000-");
+	assert.equal(digits.format(-99999.98, 1, 1), "100,000.0-");
+	assert.equal(digits.format(-999999.98, 2, 2), "999,999.98-");
+	assert.equal(digits.format(-9999999.98, 3, 3), "9,999,999.980-");
+
+	assert.equal(digits.format(-0.65), "0.65-");
+	assert.equal(digits.format(-0.65, 1, 1), "0.6-");
+	assert.equal(digits.format(-0.65, 0, 0), "1-");
+	assert.equal(digits.format(-0.65, 3, 3), "0.650-");
+
+	assert.equal(digits.format(-0.75), "0.75-");
+	assert.equal(digits.format(-0.75, 1, 1), "0.8-");
+	assert.equal(digits.format(-0.75, 0, 0), "1-");
+	assert.equal(digits.format(-0.75, 3, 3), "0.750-");
+
+	assert.equal(digits.format(-1.6421), "1.642-");
+	assert.equal(digits.format(-1.6421, 1, 1), "1.6-");
+	assert.equal(digits.format(-1.6421, 0, 0), "2-");
+	assert.equal(digits.format(-1.6421, 3, 3), "1.642-");
+	assert.equal(digits.format(-1.6421, 0, 4), "1.6421-");
+	assert.equal(digits.format(-1.6421, 0, 5), "1.6421-");
+	assert.equal(digits.format(-1.6421, 5, 5), "1.64210-");
+
+	assert.equal(digits.format(-7.54), "7.54-");
+	assert.equal(digits.format(-7.54, 1, 1), "7.5-");
+	assert.equal(digits.format(-7.54, 0, 0), "8-");
+	assert.equal(digits.format(-7.54, 3, 3), "7.540-");
+
+	assert.equal(digits.format(-9.54), "9.54-");
+	assert.equal(digits.format(-9.54, 1, 1), "9.5-");
+	assert.equal(digits.format(-9.54, 0, 0), "10-");
+	assert.equal(digits.format(-9.54, 3, 3), "9.540-");
+
+	assert.equal(digits.format(-10.43), "10.43-");
+	assert.equal(digits.format(-10.43, 1, 1), "10.4-");
+	assert.equal(digits.format(-10.43, 0, 0), "10-");
+	assert.equal(digits.format(-10.43, 3, 3), "10.430-");
+
+	assert.equal(digits.format(-100.43), "100.43-");
+	assert.equal(digits.format(-1000.43), "1,000.43-");
+	assert.equal(digits.format(-100000.43), "100,000.43-");
+	assert.equal(digits.format(-100000.43, 3, 3), "100,000.430-");
+	assert.equal(digits.format(-100000000.43), "100,000,000.43-");
 
 	assert.equal(digits.format(-42), "42-");
 	assert.equal(digits.format(-42.23), "42.23-");
