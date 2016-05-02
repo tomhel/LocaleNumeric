@@ -71,36 +71,6 @@ instance.format(9999.99);       // 9999,99
 instance.format(9999.99, 0, 0); // 10 000
 ```
 
-### Get country code
-
-```
-<instance>.getCountry()
-```
-
-Get country ISO2 code.
-
-__returns__ the code
-
-### Get language code
-
-```
-<instance>.getLanguage()
-```
-
-Get language ISO2 code.
-
-__returns__ the code
-
-### Get variant code
-
-```
-<instance>.getVariant()
-```
-
-Get variant ISO2 code.
-
-__returns__ the code
-
 ### Get country display name
 
 ```
@@ -130,6 +100,36 @@ __returns__ the name
 Get variant name.
 
 __returns__ the name
+
+### Get country code
+
+```
+<instance>.getCountry()
+```
+
+Get country ISO2 code.
+
+__returns__ the code
+
+### Get language code
+
+```
+<instance>.getLanguage()
+```
+
+Get language ISO2 code.
+
+__returns__ the code
+
+### Get variant code
+
+```
+<instance>.getVariant()
+```
+
+Get variant ISO2 code.
+
+__returns__ the code
 
 ### Get country ISO3 code
 
