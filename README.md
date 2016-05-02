@@ -71,7 +71,7 @@ instance.format(9999.99);       // 9999,99
 instance.format(9999.99, 0, 0); // 10 000
 ```
 
-### Get locale list
+### Get code list
 
 ```
 Digits.getCodeList()
