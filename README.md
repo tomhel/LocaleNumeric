@@ -120,7 +120,7 @@ Get variant code.
 
 __returns__ the code.
 
-### Get Country display name
+### Get country display name
 
 ```
 <instance>.getDisplayCountry()
@@ -130,7 +130,7 @@ Get country name.
 
 __returns__ the name.
 
-### Get Language display name
+### Get language display name
 
 ```
 <instance>.getDisplayLanguage()
@@ -150,7 +150,7 @@ Get variant name.
 
 __returns__ the name.
 
-### Get Country ISO3 code
+### Get country ISO3 code
 
 ```
 <instance>.getCountryISO3()
@@ -160,7 +160,7 @@ Get language ISO3 code.
 
 __returns__ the code.
 
-### Get Language ISO3 code
+### Get language ISO3 code
 
 ```
 <instance>.getLanguageISO3()
