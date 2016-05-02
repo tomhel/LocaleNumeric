@@ -173,6 +173,36 @@ __returns__ the code
 
 ##Advanced API
 
+###Set fallback locale
+
+```
+Digits.setFallbackLocale(locale)
+```
+
+The fallback locale will be used if language and country code is unknown when calling the _new Digits(code)_ constructor
+Default fallback locale is en_US.
+
+- _locale_ - the locale to use as fallback
+
+```javascript
+var fallback = new Digits("sv_SE");
+Digits.setFallbackLocale(fallback.locale);
+```
+
+###Use ISO3 codes
+
+```
+Digits.useISO3()
+```
+
+Digits objects are instantiated using ISO2 codes by default. This can be changed to ISO3 codes.
+This method must be called before creating any Digits objects.
+
+```javascript
+Digits.useISO3();
+var digits = new Digits("swe_SWE"); //ISO3 code
+```
+
 ###Locale factory method
 
 ```
@@ -232,36 +262,6 @@ __returns__ 0 on success, 1 on failure
 ```javascript
 var locale = Digits.localeFactory(...);
 Digits.define(locale);
-```
-
-###Set fallback locale
-
-```
-Digits.setFallbackLocale(locale)
-```
-
-The fallback locale will be used if language and country code is unknown when calling the _new Digits(code)_ constructor
-Default fallback locale is en_US.
-
-- _locale_ - the locale to use as fallback
-
-```javascript
-var fallback = new Digits("sv_SE");
-Digits.setFallbackLocale(fallback.locale);
-```
-
-###Use ISO3 codes
-
-```
-Digits.useISO3()
-```
-
-Digits objects are instantiated using ISO2 codes by default. This can be changed to ISO3 codes.
-This method must be called before creating any Digits objects.
-
-```javascript
-Digits.useISO3();
-var digits = new Digits("swe_SWE"); //ISO3 code
 ```
 
 ###Disable auto define
