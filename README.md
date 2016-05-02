@@ -254,7 +254,7 @@ Digits.define(locale, skipValidation)
 Add a new locale.
 
 - _locale_ - the locale to add
-- _skipValidation_ - optional. Skip locale validation. Default is false
+- _skipValidation_ - optional. Skip locale validation. _true_ or _false_. Default is _false_
 
 __returns__ _true_ on success, _false_ on failure
 
