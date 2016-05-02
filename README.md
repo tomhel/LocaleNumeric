@@ -215,7 +215,7 @@ Digits.localeFactory(language, country, variant, languageISO3,
 		infinity, roundingMode, digitArray)
 ```
 
-Factory method to create a custom locale.
+Factory method is used to create custom locales.
 
 - _language_ - ISO2 language code
 - _country_ - ISO2 country code
