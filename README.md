@@ -156,7 +156,7 @@ __returns__ the name.
 <instance>.getCountryISO3()
 ```
 
-Get language ISO3 code.
+Get country ISO3 code.
 
 __returns__ the code.
 
