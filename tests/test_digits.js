@@ -477,6 +477,11 @@ QUnit.test("indexByISO3", function(assert) {
 	assert.equal(Digits.indexByISO3(digits.locale), "swe_SWE");
 });
 
+QUnit.test("getCodeList", function(assert) {
+	var codeList = Digits.getCodeList();
+	assert.equal(codeList.length, 152);
+});
+
 QUnit.test("Default fallback locale en_US (United States)", function(assert) {
 	var digits = new Digits();
 	assert.equal(digits.getCountry(), "US");

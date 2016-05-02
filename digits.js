@@ -346,6 +346,14 @@ Digits.define = function(localeObject, optional_isSkipValidation) {
 };
 
 /**
+
+ * Wrapper function used externally to get the list of locale codes; 
+ */
+Digits.getCodeList = function() {
+	return Digits.locales().getCodeList();
+};
+
+/**
  * Wrapper function used externally to undefine locales; 
  */
 Digits.undefine = function(localeCode) {
@@ -367,7 +375,26 @@ Digits.locales = function() {
 	var get = function(localeCode) {
 		return locales[localeCode];
 	};
-	
+
+	/**
+	 * Get list of all supported locales.
+	 */
+	var getCodeList = function() {
+		var codeList = [];
+		var key;
+		var i = 0;
+		for (key in locales) {
+			var locale = locales[key];
+			codeList[i++] = {
+				codeISO2: Digits.indexByISO2(locale),
+				codeISO3: Digits.indexByISO3(locale),
+				language: locale.displayLanguage,
+				country: locale.displayCountry
+			};
+		}
+		return codeList;
+	};
+
 	/**
 	 * Undefine (remove) a locale from the structure.
 	 */
@@ -601,14 +628,16 @@ Digits.locales = function() {
 		return {
 			define: define,
 			undefine: undefine,
-			get: get
+			get: get,
+			getCodeList: getCodeList
 		};
 	};
 	
 	return {
 		define: define,
 		undefine: undefine,
-		get: get
+		get: get,
+		getCodeList: getCodeList
 	};
 };
 

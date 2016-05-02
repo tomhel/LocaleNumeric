@@ -1,5 +1,5 @@
 # digits.js
-Format numbers to 151 different locales in JavaScript. Besides number formatting it will also handle number rounding according to locale.
+Format numbers to 152 different locales in JavaScript. Besides number formatting it will also handle number rounding according to locale.
 
 It is very simple to use, watch:
 
@@ -25,6 +25,10 @@ MIT
 ##Unit tests
 
 This framework is tested using QUnit. The tests can be found in the _tests_ directory.
+
+###Locales
+
+View full list of available locales in [locales.md](locales.md)
 
 ##API
 
@@ -62,7 +66,26 @@ instance.format(9999.99);       // 9999,99
 instance.format(9999.99, 0, 0); // 10 000
 ```
 
-### Get Country code
+### Get Locale list
+
+```
+Digits.getCodeList()
+```
+
+Get codes for all available locales.
+
+__returns__ list containing all available locale codes.
+
+
+```javascript
+var codes = Digits.getCodeList();
+var iso2code = codes[0].codeISO2;
+var iso3code = codes[0].codeISO3;
+var language = codes[0].language;
+var country = codes[0].country;
+```
+
+### Get country code
 
 ```
 <instance>.getCountry()
@@ -72,7 +95,7 @@ Get country ISO2 code.
 
 __returns__ the code.
 
-### Get Language code
+### Get language code
 
 ```
 <instance>.getLanguage()
