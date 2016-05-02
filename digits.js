@@ -377,9 +377,9 @@ Digits.locales = function() {
 	/* Contains all locales. */
 	var locales = {};
 	/* Returned on define failure. */
-	var failure = 1;
+	var failure = false;
 	/* Returned on define success. */
-	var success = 0;
+	var success = true;
 
 	/**
 	 * Gets a locale object.  Will return undefined if locale does not exist.

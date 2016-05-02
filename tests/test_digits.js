@@ -851,7 +851,7 @@ QUnit.test("Set fallback locale to sv_SE (Sweden)", function(assert) {
 });
 
 QUnit.test("Define custom locale (xx_YY)", function(assert) {
-	assert.equal(Digits.define(Digits.localeFactory("xx", "YY", "", "xxx", "YYY", "Whatever", "Whereever", "", "_", "=", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true), 0);
+	assert.equal(Digits.define(Digits.localeFactory("xx", "YY", "", "xxx", "YYY", "Whatever", "Whereever", "", "_", "=", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), false), true);
 	var digits = new Digits("xx_YY");
 	assert.equal(digits.getCountry(), "YY");
 	assert.equal(digits.getLanguage(), "xx");
