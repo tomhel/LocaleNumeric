@@ -79,7 +79,7 @@ Digits.getCodeList()
 
 Get codes for all available locales.
 
-__returns__ list containing all available locale codes.
+__returns__ a list containing all available locale codes.
 
 
 ```javascript
