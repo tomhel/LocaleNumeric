@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>digits.js Example</title>
+</head>
+<body>
+  <p><b>Formatting to:</b></p>
+  <p id="locale"></p>
+
+  <p><b>The number to format is:</b></p>
+  <pre id="number"></pre>
+
+  <p><b>Formatted it looks like this:</b></p>
+  <pre id="formatted"></pre>
+
+  <script src="../digits.js"></script>
+
+  <script>
+
+    // Get DOM elements
+    var elementNumber = document.getElementById("number");
+    var elementFormatted = document.getElementById("formatted");
+    var elementLocale = document.getElementById("locale");
+
+    // Randomize locale
+    var codeList = Digits.getCodeList();
+    var index = Math.floor(Math.random() * codeList.length);
+    var codeISO2 = codeList[index].codeISO2;
+
+    // Randomize number
+    var number = Math.random() * 10000 - 5000;
+
+    // Format number
+    var digits = new Digits(codeISO2);
+    var formatted = digits.format(number);
+
+    // Update DOM elements
+    elementLocale.innerHTML = digits.getDisplayLanguage() + " " + digits.getDisplayCountry();
+    elementNumber.innerHTML = number;
+    elementFormatted.innerHTML = formatted;
+
+  </script>
+
+  <button onclick="location.reload()">Try again!</button>
+</body>
+</html>
