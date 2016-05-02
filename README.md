@@ -30,6 +30,10 @@ MIT
 
 This framework is tested using QUnit. The tests can be found in the _tests_ directory.
 
+##Examples
+
+Examples on how to use digits.js are in the _examples_ directory.
+
 ##API
 
 ###Create digit object
