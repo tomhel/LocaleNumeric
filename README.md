@@ -35,7 +35,7 @@ This framework is tested using QUnit. The tests can be found in the _tests_ dire
 ###Create digit object
 
 ```
-Digits(code)
+new Digits(code)
 ```
 
 Create an instance by passing an ISO2 language/country code to the constructor. If the locale does not exist a fallback locale will be returned. Default fallback is en_US (English, United States).
@@ -287,7 +287,7 @@ Digits.roundHalfToEven(number)
 Digits.roundHalfToOdd(number)
 ```
 
-These rounding methods can be used when defining custom locales.
+These rounding methods should be used when defining custom locales.
 
 - _number_ - the number to round
 
