@@ -246,7 +246,7 @@ Default fallback locale is en_US
 - _locale_ - the locale to use as fallback
 
 ```javascript
-var fallback = Digits("sv_SE");
+var fallback = new Digits("sv_SE");
 Digits.setFallbackLocale(fallback.locale);
 ```
 
@@ -261,7 +261,7 @@ This method must be called before creating any Digits objects.
 
 ```javascript
 Digits.useISO3();
-var digits = Digits("swe_SWE"); //ISO3 code
+var digits = new Digits("swe_SWE"); //ISO3 code
 ```
 
 ###Disable auto define
@@ -277,7 +277,7 @@ This method must be called before creating any Digits objects.
 Digits.disableAutoDefine();
 Digits.define(Digits.localeFactory(...));
 Digits.setFallbackLocale(Digits.localeFactory(...));
-var digits = Digits("xx_YY");
+var digits = new Digits("xx_YY");
 ```
 
 ###Rounding modes
