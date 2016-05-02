@@ -1,18 +1,18 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2016 Tommy Hellstrom
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,13 +31,13 @@
  */
 
 /**
- * Constructor. 
- * Accepts a locale code. 
+ * Constructor.
+ * Accepts a locale code.
  * Will fallback if code is invalid or does not exist.
  */
 Digits = function (localeCode) {
 	var locales = Digits.locales();
-	
+
 	if(localeCode === undefined || localeCode === null) {
 		//fallback
 		if(Digits.fallbackLocaleCode !== undefined && Digits.fallbackLocaleCode !== null) {
@@ -45,7 +45,7 @@ Digits = function (localeCode) {
 		}
 	} else {
 		var localeObject = locales.get(localeCode);
-		
+
 		if(localeObject === undefined || localeObject === null) {
 			//fallback
 			if(Digits.fallbackLocaleCode !== undefined && Digits.fallbackLocaleCode !== null) {
@@ -65,9 +65,9 @@ Digits.roundHalfTowardsInfinity = function(number) {
 	if(number == 0) {
 		return 0;
 	}
-	
+
 	var reminder = number % 1;
-	
+
 	if(reminder == 0) {
 		return number;
 	} else if(number > 0) {
@@ -92,9 +92,9 @@ Digits.roundHalfTowardsZero = function(number) {
 	if(number == 0) {
 		return 0;
 	}
-	
+
 	var reminder = number % 1;
-	
+
 	if(reminder == 0) {
 		return number;
 	} else if(number > 0) {
@@ -119,9 +119,9 @@ Digits.roundHalfUp = function(number) {
 	if(number == 0) {
 		return 0;
 	}
-	
+
 	var reminder = number % 1;
-	
+
 	if(reminder == 0) {
 		return number;
 	} else if(number > 0) {
@@ -146,9 +146,9 @@ Digits.roundHalfDown = function(number) {
 	if(number == 0) {
 		return 0;
 	}
-	
+
 	var reminder = number % 1;
-	
+
 	if(reminder == 0) {
 		return number;
 	} else if(number > 0) {
@@ -173,9 +173,9 @@ Digits.roundHalfToEven = function(number) {
 	if(number == 0) {
 		return 0;
 	}
-	
+
 	var reminder = number % 2;
-	
+
 	if(reminder == 0 || reminder == 1 || reminder == -1) {
 		return number;
 	} else if(number > 0) {
@@ -216,9 +216,9 @@ Digits.roundHalfToOdd = function(number) {
 	if(number == 0) {
 		return 0;
 	}
-	
+
 	var reminder = number % 2;
-	
+
 	if(reminder == 0 || reminder == 1 || reminder == -1) {
 		return number;
 	} else if(number > 0) {
@@ -256,38 +256,38 @@ Digits.roundHalfToOdd = function(number) {
  * Indexing by ISO2 codes.
  */
 Digits.indexByISO2 = function(localeObject) {
-	return localeObject.language + 
-			((localeObject.country === "") ? "" : "_" + localeObject.country) + 
-			((localeObject.variant === "") ? "" : "_" + localeObject.variant);		
+	return localeObject.language +
+			((localeObject.country === "") ? "" : "_" + localeObject.country) +
+			((localeObject.variant === "") ? "" : "_" + localeObject.variant);
 };
 
 /**
  * Indexing by ISO3 codes.
  */
 Digits.indexByISO3 = function(localeObject) {
-	return localeObject.languageISO3 + 
+	return localeObject.languageISO3 +
 			((localeObject.countryISO3 === "") ? "" : "_" + localeObject.countryISO3);
 };
 
 /**
  * Factory to create locale objects.
  */
-Digits.localeFactory = function(language, country, variant, languageISO3, 
+Digits.localeFactory = function(language, country, variant, languageISO3,
 							countryISO3, displayLanguage, displayCountry, displayVariant,
-							decimalSymbol, groupSymbol, minFractionDigits, 
-							maxFractionDigits, groupingArray, isLeadingDecimalZero, 
-							isAlwaysShowDecimalSymbol, negativeNumberFormat, 
-							positiveNumberFormat, zeroNumberFormat, nAn, 
+							decimalSymbol, groupSymbol, minFractionDigits,
+							maxFractionDigits, groupingArray, isLeadingDecimalZero,
+							isAlwaysShowDecimalSymbol, negativeNumberFormat,
+							positiveNumberFormat, zeroNumberFormat, nAn,
 							infinity, roundingMode, digitArray) {
-							
+
 	return {
-		language:language, country:country, variant:variant, languageISO3:languageISO3, countryISO3:countryISO3, 
+		language:language, country:country, variant:variant, languageISO3:languageISO3, countryISO3:countryISO3,
 		displayCountry:displayCountry, displayLanguage:displayLanguage, displayVariant:displayVariant,
 		numbers: {
-				decimalSymbol:decimalSymbol, groupSymbol:groupSymbol, minFractionDigits:minFractionDigits, 
-				maxFractionDigits:maxFractionDigits, grouping:groupingArray, leadingDecimalZero:isLeadingDecimalZero, 
-				alwaysShowDecimalSymbol:isAlwaysShowDecimalSymbol, negativeNumberFormat:negativeNumberFormat, 
-				positiveNumberFormat:positiveNumberFormat, zeroNumberFormat:zeroNumberFormat, nAn:nAn, 
+				decimalSymbol:decimalSymbol, groupSymbol:groupSymbol, minFractionDigits:minFractionDigits,
+				maxFractionDigits:maxFractionDigits, grouping:groupingArray, leadingDecimalZero:isLeadingDecimalZero,
+				alwaysShowDecimalSymbol:isAlwaysShowDecimalSymbol, negativeNumberFormat:negativeNumberFormat,
+				positiveNumberFormat:positiveNumberFormat, zeroNumberFormat:zeroNumberFormat, nAn:nAn,
 				infinity:infinity, round:roundingMode, digits:digitArray
 			}
 		};
@@ -317,7 +317,7 @@ Digits.enableAutoDefine = function() {
 };
 
 /**
- * Set the fallback locale. 
+ * Set the fallback locale.
  * This locale will be used if requested locale does not exist.
  */
 Digits.setFallbackLocale = function(localeObject) {
@@ -339,7 +339,7 @@ Digits.useISO3 = function() {
 };
 
 /**
- * Wrapper function used externally to define new locales; 
+ * Wrapper function used externally to define new locales;
  */
 Digits.define = function(localeObject, optional_isSkipValidation) {
 	return Digits.locales().define(localeObject, optional_isSkipValidation);
@@ -347,28 +347,28 @@ Digits.define = function(localeObject, optional_isSkipValidation) {
 
 /**
 
- * Wrapper function used externally to get the list of locale codes; 
+ * Wrapper function used externally to get the list of locale codes;
  */
 Digits.getCodeList = function() {
 	return Digits.locales().getCodeList();
 };
 
 /**
- * Wrapper function used externally to undefine locales; 
+ * Wrapper function used externally to undefine locales;
  */
 Digits.undefine = function(localeCode) {
 	Digits.locales().undefine(localeCode);
 };
 
 /* Data structure holding defined locales. Locales are defined on first access (lazy). */
-Digits.locales = function() {	
+Digits.locales = function() {
 	/* Contains all locales. */
 	var locales = {};
 	/* Returned on define failure. */
 	var failure = 1;
 	/* Returned on define success. */
 	var success = 0;
-	
+
 	/**
 	 * Gets a locale object.  Will return undefined if locale does not exist.
 	 */
@@ -401,7 +401,7 @@ Digits.locales = function() {
 	 */
 	var undefine = function(localeCode) {
 		var locale = locales[localeCode];
-		
+
 		if(locale !== undefined) {
 			delete locales[localeCode];
 		}
@@ -445,7 +445,7 @@ Digits.locales = function() {
 			if(typeof localeObject.numbers.round !== "function") { return failure; }
 			if(!(localeObject.numbers.digits instanceof Array)) { return failure; }
 			if(localeObject.numbers.digits.length != 10) { return failure; }
-			
+
 			var i;
 
 			for(i = 0; i < localeObject.numbers.grouping.length; i++) {
@@ -453,7 +453,7 @@ Digits.locales = function() {
 					return failure;
 				}
 			}
-			
+
 			for(i = 0; i < localeObject.numbers.digits.length; i++) {
 				if(typeof localeObject.numbers.digits[i] === "number") {
 					/* do nothing */
@@ -464,14 +464,14 @@ Digits.locales = function() {
 				}
 			}
 		}
-		
+
 		//create index.
 		var localeCode = Digits.indexingMethod(localeObject);
 		//insert locale.
 		locales[localeCode] = localeObject;
 		return success;
 	};
-	
+
 	//locales are automatically defined if not disabled.
 	if(Digits.isAutoDefineEnabled) {
 		define(Digits.localeFactory("ja", "JP", "", "jpn", "JPN", "Japanese", "Japan", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
@@ -632,7 +632,7 @@ Digits.locales = function() {
 			Digits.setFallbackLocale(locale_en_US);
 		}
 	}
-	
+
 	Digits.locales = function() {
 		return {
 			define: define,
@@ -641,7 +641,7 @@ Digits.locales = function() {
 			getCodeList: getCodeList
 		};
 	};
-	
+
 	return {
 		define: define,
 		undefine: undefine,
@@ -721,17 +721,17 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		//can happen if the fallback locale is invalid.
 		return;
 	}
-	
+
 	//if number is NaN or infinite end here.
 	if(number === undefined || number === null || isNaN(number)) {
 		return numLocale.numbers.nAn;
 	} else if(!isFinite(number)) {
 		return numLocale.numbers.infinity;
 	}
-	
+
 	var minFractionDigits = optional_minFractionDigits;
 	var maxFractionDigits = optional_maxFractionDigits;
-	
+
 	//validate or set precision parameters.
 	if (minFractionDigits === undefined || minFractionDigits === null) {
 		//use defaults for locale.
@@ -740,7 +740,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		//invalid precision parameter.
 		return;
 	}
-	
+
 	//validate or set precision parameters.
 	if (maxFractionDigits === undefined || maxFractionDigits === null) {
 		//use defaults for locale.
@@ -749,21 +749,21 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		//invalid precision parameter.
 		return;
 	}
-	
+
 	var preparedNumber = number;
 	//check if number is negative. this information is needed later.
 	var isNegativeNumber = (preparedNumber < 0);
-	
+
 	if(isNegativeNumber) {
 		//work is done on positive numbers, but sign is restored at the end.
 		preparedNumber = -preparedNumber;
 	}
-	
+
 	var numString = String(preparedNumber);
 	var decimalSymbolIndex = numString.indexOf(".");
 	var precision;
 	var fractionPart;
-	
+
 	//precision decisions
 	if(decimalSymbolIndex == -1) {
 		//number is an integer. assume precision should be zero.
@@ -782,7 +782,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	} else if(precision > maxFractionDigits) {
 		precision = maxFractionDigits;
 	}
-	
+
 	//if precision should be zero, but input number has fractions
 	//it must be rounded before formatting.
 	if(precision == 0 && fractionPart.length > 0) {
@@ -792,14 +792,14 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		} else {
 			preparedNumber = numLocale.numbers.round(preparedNumber);
 		}
-		
+
 		//number might have changed after rounding.
 		numString = String(preparedNumber);
 		decimalSymbolIndex = numString.indexOf(".");
 	}
-	
+
 	var zeroPaddedFractionPart = "";
-	
+
 	//padding or rounding of fraction part depending on decided precision.
 	if(fractionPart.length < precision) {
 		//zero padding.
@@ -817,28 +817,28 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 				break;
 			}
 		}
-		
+
 		var fractionInt = parseInt(fractionPart.slice(leadingZeros));
 		fractionInt = fractionInt / Math.pow(10, fractionPart.length - precision);
-		
+
 		//rounding depends on number sign. negative or positive.
 		if(isNegativeNumber) {
 			fractionInt = -numLocale.numbers.round(-fractionInt);
 		} else {
 			fractionInt = numLocale.numbers.round(fractionInt);
 		}
-		
+
 		var fractionIntString = String(fractionInt);
-		
+
 		fractionPart = "";
-		
+
 		//check if rounding has overflowed to one whole (1).
 		if(fractionIntString.length > precision) {
 			//add overflow.
 			preparedNumber++;
 			numString = String(preparedNumber);
 			decimalSymbolIndex = numString.indexOf(".");
-			
+
 			//pad precision
 			for(i = 0; i < precision; i++) {
 				fractionPart += "0";
@@ -851,19 +851,19 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 					fractionPart += "0";
 				}
 			}
-			
+
 			//add rounded fraction part.
 			fractionPart += fractionIntString.substr(0, (precision > fractionIntString.length) ? fractionIntString.length : precision);
 		}
 	}
-	
+
 	//extract integer part
 	var integerPart = numString.substring(0, ((decimalSymbolIndex == -1) ? numString.length: decimalSymbolIndex));
 	var numFormattedIntegerPart = "";
 	var grouping = numLocale.numbers.grouping;
 	var index = integerPart.length - 1;
-	
-	//format groups using localized digits for integer part. from right to left. 
+
+	//format groups using localized digits for integer part. from right to left.
 	//leftmost group is not formatted here.
 	for(j = grouping.length - 1; j > 0; j--) {
 		for(i = index, count = grouping[j]; i >= 0 && count > 0; i--, count--) {
@@ -875,14 +875,14 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 				numFormattedIntegerPart = numLocale.numbers.groupSymbol + numLocale.numbers.digits[integerPart.charAt(i)] + numFormattedIntegerPart;
 			}
 		}
-		
+
 		index-=(grouping[j]);
 	}
-	
+
 	//format leftmost group using localized digits for integer part. right to left.
 	for(i = index, count = grouping[0]; i >= 0; i--, count--) {
 		if(grouping[0] == 0 || count > 1 || i == 0) {
-			//if group length is infinite (0), or last digit of the integer part, 
+			//if group length is infinite (0), or last digit of the integer part,
 			//or not last digit of current group. do not att group symbol.
 			numFormattedIntegerPart = numLocale.numbers.digits[integerPart.charAt(i)] + numFormattedIntegerPart;
 		} else {
@@ -891,17 +891,17 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 			count = grouping[0] + 1;
 		}
 	}
-	
+
 	var numFormattedFractionPart = "";
-	
+
 	//format fraction part using localized digits.
 	for(i = 0; i < fractionPart.length; i++) {
 		numFormattedFractionPart+=numLocale.numbers.digits[fractionPart[i]];
 	}
-	
+
 	numFormattedFractionPart+=zeroPaddedFractionPart;
 	var formatPattern;
-	
+
 	//decide format pattern: positive, negative or zero.
 	if(isNegativeNumber) {
 		formatPattern = numLocale.numbers.negativeNumberFormat;
@@ -910,9 +910,9 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	} else {
 		formatPattern = numLocale.numbers.positiveNumberFormat;
 	}
-	
+
 	var numFormattedCombined;
-	
+
 	//formatting decisions.
 	if(precision == 0 && numLocale.numbers.alwaysShowDecimalSymbol) {
 		//number is integer, but show decimal symbol anyway.
@@ -928,9 +928,9 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		//number is only fraction part and should not have a leading zero.
 		numFormattedCombined = numLocale.numbers.decimalSymbol + numFormattedFractionPart;
 	}
-	
+
 	var numFormatted = "";
-	
+
 	//last formatting of number according to pattern: positive, negative or zero.
 	for(i = 0; i < formatPattern.length; i++) {
 		if(formatPattern.charAt(i) === "#") {
@@ -939,6 +939,6 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 			numFormatted = numFormatted + formatPattern.charAt(i);
 		}
 	}
-	
+
 	return numFormatted;
 };
