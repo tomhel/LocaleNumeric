@@ -181,6 +181,7 @@ QUnit.test("roundHalfToOdd", function(assert) {
 QUnit.test("format NaN & Infinity sv_SE (Sweden)", function(assert) {
 	var digits = new Digits("sv_SE");
 	assert.equal(digits.format(Infinity), "\u221e");
+	assert.equal(digits.format(-Infinity), "-\u221e");
 	assert.equal(digits.format(NaN), "\ufffd");
 });
 
@@ -379,6 +380,7 @@ QUnit.test("format negative number sv_SE (Sweden)", function(assert) {
 QUnit.test("format NaN & Infinity en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(Infinity), "\u221e");
+	assert.equal(digits.format(-Infinity), "-\u221e");
 	assert.equal(digits.format(NaN), "\ufffd");
 });
 
@@ -577,6 +579,7 @@ QUnit.test("format negative number en_US (United States)", function(assert) {
 QUnit.test("format NaN & Infinity ar_EG (Egypt)", function(assert) {
 	var digits = new Digits("ar_EG");
 	assert.equal(digits.format(Infinity), "\u221e");
+	assert.equal(digits.format(-Infinity), "\u221e-");
 	assert.equal(digits.format(NaN), "\ufffd");
 });
 
@@ -830,16 +833,6 @@ QUnit.test("getCodeList", function(assert) {
 
 QUnit.test("Default fallback locale en_US (United States)", function(assert) {
 	var digits = new Digits();
-	assert.equal(digits.getCountry(), "US");
-	assert.equal(digits.getLanguage(), "en");
-});
-
-QUnit.test("Undefine locale en_GB (United Kingdom)", function(assert) {
-	var digits = new Digits("en_GB");
-	assert.equal(digits.getCountry(), "GB");
-	assert.equal(digits.getLanguage(), "en");
-	Digits.undefine("en_GB");
-	digits = new Digits("en_GB");
 	assert.equal(digits.getCountry(), "US");
 	assert.equal(digits.getLanguage(), "en");
 });

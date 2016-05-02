@@ -354,10 +354,22 @@ Digits.getCodeList = function() {
 };
 
 /**
- * Wrapper function used externally to undefine locales;
+ * Internal formatting method. Should not be called externally!
  */
-Digits.undefine = function(localeCode) {
-	Digits.locales().undefine(localeCode);
+Digits.formatInternal = function(number, formatPattern) {
+	var numFormatted = "";
+	var i;
+
+	//formatting of number according to pattern
+	for(i = 0; i < formatPattern.length; i++) {
+		if(formatPattern.charAt(i) === "#") {
+			numFormatted = numFormatted + number;
+		} else {
+			numFormatted = numFormatted + formatPattern.charAt(i);
+		}
+	}
+
+	return numFormatted;
 };
 
 /* Data structure holding defined locales. Locales are defined on first access (lazy). */
@@ -722,11 +734,9 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		return;
 	}
 
-	//if number is NaN or infinite end here.
+	//if number is NaN end here.
 	if(number === undefined || number === null || isNaN(number)) {
 		return numLocale.numbers.nAn;
-	} else if(!isFinite(number)) {
-		return numLocale.numbers.infinity;
 	}
 
 	var minFractionDigits = optional_minFractionDigits;
@@ -753,6 +763,15 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	var preparedNumber = number;
 	//check if number is negative. this information is needed later.
 	var isNegativeNumber = (preparedNumber < 0);
+
+	//if number if infinite end here
+	if(!isFinite(preparedNumber)) {
+		if (isNegativeNumber) {
+			return Digits.formatInternal(numLocale.numbers.infinity, numLocale.numbers.negativeNumberFormat);
+		} else {
+			return Digits.formatInternal(numLocale.numbers.infinity, numLocale.numbers.positiveNumberFormat);
+		}
+	}
 
 	if(isNegativeNumber) {
 		//work is done on positive numbers, but sign is restored at the end.
@@ -929,16 +948,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		numFormattedCombined = numLocale.numbers.decimalSymbol + numFormattedFractionPart;
 	}
 
-	var numFormatted = "";
-
 	//last formatting of number according to pattern: positive, negative or zero.
-	for(i = 0; i < formatPattern.length; i++) {
-		if(formatPattern.charAt(i) === "#") {
-			numFormatted = numFormatted + numFormattedCombined;
-		} else {
-			numFormatted = numFormatted + formatPattern.charAt(i);
-		}
-	}
-
+	var numFormatted = Digits.formatInternal(numFormattedCombined, formatPattern);
 	return numFormatted;
 };
