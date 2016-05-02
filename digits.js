@@ -383,8 +383,9 @@ Digits.locales = function() {
 		var codeList = [];
 		var key;
 		var i = 0;
+		var locale;
 		for (key in locales) {
-			var locale = locales[key];
+			locale = locales[key];
 			codeList[i++] = {
 				codeISO2: Digits.indexByISO2(locale),
 				codeISO3: Digits.indexByISO3(locale),
@@ -418,41 +419,49 @@ Digits.locales = function() {
 
 		//skip or do validation.
 		if(!optional_isSkipValidation) {
-			if(typeof localeObject !== "object") return failure;
-			if(typeof localeObject.country !== "string") return failure;
-			if(typeof localeObject.language !== "string") return failure;
-			if(typeof localeObject.variant !== "string") return failure;
-			if(typeof localeObject.countryISO3 !== "string") return failure;
-			if(typeof localeObject.languageISO3 !== "string") return failure;
-			if(typeof localeObject.displayCountry !== "string")return failure;
-			if(typeof localeObject.displayLanguage !== "string") return failure;
-			if(typeof localeObject.displayVariant !== "string") return failure;
-			if(typeof localeObject.numbers !== "object") return failure;
-			if(typeof localeObject.numbers.decimalSymbol !== "string") return failure;
-			if(typeof localeObject.numbers.groupSymbol !== "string") return failure;
-			if(typeof localeObject.numbers.maxFractionDigits !== "number") return failure;
-			if(typeof localeObject.numbers.minFractionDigits !== "number") return failure;
-			if(!(localeObject.numbers.grouping instanceof Array)) return failure;
-			if(localeObject.numbers.grouping.length == 0) return failure;
-			if(typeof localeObject.numbers.leadingDecimalZero !== "boolean") return failure;
-			if(typeof localeObject.numbers.alwaysShowDecimalSymbol !== "boolean") return failure;
-			if(typeof localeObject.numbers.negativeNumberFormat !== "string") return failure;
-			if(typeof localeObject.numbers.positiveNumberFormat !== "string") return failure;
-			if(typeof localeObject.numbers.zeroNumberFormat !== "string") return failure;
-			if(typeof localeObject.numbers.nAn !== "string") return failure;
-			if(typeof localeObject.numbers.infinity !== "string") return failure;
-			if(typeof localeObject.numbers.round !== "function") return failure;
-			if(!(localeObject.numbers.digits instanceof Array)) return failure;
-			if(localeObject.numbers.digits.length != 10) return failure;
+			if(typeof localeObject !== "object") { return failure; }
+			if(typeof localeObject.country !== "string") { return failure; }
+			if(typeof localeObject.language !== "string") { return failure; }
+			if(typeof localeObject.variant !== "string") { return failure; }
+			if(typeof localeObject.countryISO3 !== "string") { return failure; }
+			if(typeof localeObject.languageISO3 !== "string") { return failure; }
+			if(typeof localeObject.displayCountry !== "string") { return failure; }
+			if(typeof localeObject.displayLanguage !== "string") { return failure; }
+			if(typeof localeObject.displayVariant !== "string") { return failure; }
+			if(typeof localeObject.numbers !== "object") { return failure; }
+			if(typeof localeObject.numbers.decimalSymbol !== "string") { return failure; }
+			if(typeof localeObject.numbers.groupSymbol !== "string") { return failure; }
+			if(typeof localeObject.numbers.maxFractionDigits !== "number") { return failure; }
+			if(typeof localeObject.numbers.minFractionDigits !== "number") { return failure; }
+			if(!(localeObject.numbers.grouping instanceof Array)) { return failure; }
+			if(localeObject.numbers.grouping.length == 0) { return failure; }
+			if(typeof localeObject.numbers.leadingDecimalZero !== "boolean") { return failure; }
+			if(typeof localeObject.numbers.alwaysShowDecimalSymbol !== "boolean") { return failure; }
+			if(typeof localeObject.numbers.negativeNumberFormat !== "string") { return failure; }
+			if(typeof localeObject.numbers.positiveNumberFormat !== "string") { return failure; }
+			if(typeof localeObject.numbers.zeroNumberFormat !== "string") { return failure; }
+			if(typeof localeObject.numbers.nAn !== "string") { return failure; }
+			if(typeof localeObject.numbers.infinity !== "string") { return failure; }
+			if(typeof localeObject.numbers.round !== "function") { return failure; }
+			if(!(localeObject.numbers.digits instanceof Array)) { return failure; }
+			if(localeObject.numbers.digits.length != 10) { return failure; }
 			
-			for(var i = 0; i < localeObject.numbers.grouping.length; i++) {
-				if(typeof localeObject.numbers.grouping[i] !== "number") return failure;
+			var i;
+
+			for(i = 0; i < localeObject.numbers.grouping.length; i++) {
+				if(typeof localeObject.numbers.grouping[i] !== "number") {
+					return failure;
+				}
 			}
 			
-			for(var i = 0; i < localeObject.numbers.digits.length; i++) {
-				if(typeof localeObject.numbers.digits[i] === "number");
-				else if(typeof localeObject.numbers.digits[i] === "string");
-				else return failure;
+			for(i = 0; i < localeObject.numbers.digits.length; i++) {
+				if(typeof localeObject.numbers.digits[i] === "number") {
+					/* do nothing */
+				} else if(typeof localeObject.numbers.digits[i] === "string") {
+					/* do nothing */
+				} else {
+					return failure;
+				}
 			}
 		}
 		
@@ -703,7 +712,10 @@ Digits.prototype.getCountryISO3 = function() {
  */
 Digits.prototype.format = function(number, optional_minFractionDigits, optional_maxFractionDigits) {
 	var numLocale = this.locale;
-	
+	var i;
+	var j;
+	var count;
+
 	//check if locale is undefined.
 	if(numLocale === undefined) {
 		//can happen if the fallback locale is invalid.
@@ -791,15 +803,14 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	//padding or rounding of fraction part depending on decided precision.
 	if(fractionPart.length < precision) {
 		//zero padding.
-		for(var i = fractionPart.length; i < precision; i++) { 
+		for(i = fractionPart.length; i < precision; i++) {
 			zeroPaddedFractionPart+=numLocale.numbers.digits[0];
 		}
 	} else if(fractionPart.length > precision && precision != 0) {
 		//fraction part is to long. round it.
 		var leadingZeros = 0;
-		
 		//first, look for leading zeros.
-		for(var i = 0; i < fractionPart.length; i++) { 
+		for(i = 0; i < fractionPart.length; i++) {
 			if(fractionPart.charAt(i) === "0") {
 				leadingZeros++;
 			} else {
@@ -829,14 +840,14 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 			decimalSymbolIndex = numString.indexOf(".");
 			
 			//pad precision
-			for(var i = 0; i < precision; i++) {
+			for(i = 0; i < precision; i++) {
 				fractionPart += "0";
 			}
 		} else {
 			//no owerflow.
 			//add leading zeros if needed.
 			if(fractionIntString.length < precision) {
-				for(var i = 0; i < leadingZeros && i < precision - 1; i++) {
+				for(i = 0; i < leadingZeros && i < precision - 1; i++) {
 					fractionPart += "0";
 				}
 			}
@@ -854,8 +865,8 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	
 	//format groups using localized digits for integer part. from right to left. 
 	//leftmost group is not formatted here.
-	for(var j = grouping.length - 1; j > 0; j--) {
-		for(var i = index, count = grouping[j]; i >= 0 && count > 0; i--, count--) {
+	for(j = grouping.length - 1; j > 0; j--) {
+		for(i = index, count = grouping[j]; i >= 0 && count > 0; i--, count--) {
 			if(count > 1 || i == 0) {
 				//if not last digit in current group or is last digit in last group. do not add group symbol.
 				numFormattedIntegerPart = numLocale.numbers.digits[integerPart.charAt(i)] + numFormattedIntegerPart;
@@ -869,7 +880,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	}
 	
 	//format leftmost group using localized digits for integer part. right to left.
-	for(var i = index, count = grouping[0]; i >= 0; i--, count--) {
+	for(i = index, count = grouping[0]; i >= 0; i--, count--) {
 		if(grouping[0] == 0 || count > 1 || i == 0) {
 			//if group length is infinite (0), or last digit of the integer part, 
 			//or not last digit of current group. do not att group symbol.
@@ -884,7 +895,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	var numFormattedFractionPart = "";
 	
 	//format fraction part using localized digits.
-	for(var i = 0; i < fractionPart.length; i++) {
+	for(i = 0; i < fractionPart.length; i++) {
 		numFormattedFractionPart+=numLocale.numbers.digits[fractionPart[i]];
 	}
 	
@@ -921,7 +932,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 	var numFormatted = "";
 	
 	//last formatting of number according to pattern: positive, negative or zero.
-	for(var i = 0; i < formatPattern.length; i++) {
+	for(i = 0; i < formatPattern.length; i++) {
 		if(formatPattern.charAt(i) === "#") {
 			numFormatted = numFormatted + numFormattedCombined;
 		} else {
