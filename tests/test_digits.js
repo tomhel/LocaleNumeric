@@ -829,10 +829,18 @@ QUnit.test("indexByISO3", function(assert) {
 QUnit.test("getCodeList", function(assert) {
 	var codeList = Digits.getCodeList();
 	assert.equal(codeList.length, 152);
+	assert.ok(codeList[0].codeISO2 !== undefined);
+	assert.ok(codeList[0].codeISO3 !== undefined);
+	assert.ok(codeList[0].language !== undefined);
+	assert.ok(codeList[0].country !== undefined);
 });
 
 QUnit.test("Default fallback locale en_US (United States)", function(assert) {
 	var digits = new Digits();
+	assert.equal(digits.getCountry(), "US");
+	assert.equal(digits.getLanguage(), "en");
+
+	digits = new Digits("aa_BB");
 	assert.equal(digits.getCountry(), "US");
 	assert.equal(digits.getLanguage(), "en");
 });
@@ -840,14 +848,14 @@ QUnit.test("Default fallback locale en_US (United States)", function(assert) {
 QUnit.test("Set fallback locale to sv_SE (Sweden)", function(assert) {
 	var fallback = new Digits("sv_SE");
 	Digits.setFallbackLocale(fallback.locale);
+
 	var digits = new Digits();
 	assert.equal(digits.getCountry(), "SE");
 	assert.equal(digits.getLanguage(), "sv");
 
-	Digits.fallbackLocaleCode = "ar_EG";
-	digits = new Digits();
-	assert.equal(digits.getCountry(), "EG");
-	assert.equal(digits.getLanguage(), "ar");
+	digits = new Digits("aa_BB");
+	assert.equal(digits.getCountry(), "SE");
+	assert.equal(digits.getLanguage(), "sv");
 });
 
 QUnit.test("Define custom locale (xx_YY)", function(assert) {
