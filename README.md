@@ -45,7 +45,7 @@ new Digits(code)
 Create an instance by passing an ISO2 language/country code to the constructor. If the locale does not exist a fallback locale will be used. Default fallback is en_US (English, United States).
 See [locales.md](locales.md) for a full list of available locales.
 
-* _code_ - the ISO2 language/country code.
+* _code_ - the ISO2 language/country code
 
 ```javascript
 var instance = new Digits("sv_SE");
@@ -57,13 +57,13 @@ var instance = new Digits("sv_SE");
 <instance>.format(number, minFractionDigits, maxFractionDigits)
 ```
 
-Format a number. 
+Format a number.
 
 - _number_ - the number to format
 - _maxFractionDigits_ - optional. minimum number of fractions. If not given locale default are used
 - _maxFractionDigits_ - optional. maximum number of fractions. If not given locale default are used
 
-__returns__ the formatted number.
+__returns__ the formatted number
 
 ```javascript
 var instance = new Digits("sv_SE");
@@ -79,7 +79,7 @@ Digits.getCodeList()
 
 Get codes for all available locales.
 
-__returns__ a list containing all available locale codes.
+__returns__ a list containing all available locale codes
 
 
 ```javascript
@@ -98,7 +98,7 @@ var country = codes[0].country;
 
 Get country ISO2 code.
 
-__returns__ the code.
+__returns__ the code
 
 ### Get language code
 
@@ -108,7 +108,7 @@ __returns__ the code.
 
 Get language ISO2 code.
 
-__returns__ the code.
+__returns__ the code
 
 ### Get variant code
 
@@ -118,7 +118,7 @@ __returns__ the code.
 
 Get variant ISO2 code.
 
-__returns__ the code.
+__returns__ the code
 
 ### Get country display name
 
@@ -128,7 +128,7 @@ __returns__ the code.
 
 Get country name.
 
-__returns__ the name.
+__returns__ the name
 
 ### Get language display name
 
@@ -138,7 +138,7 @@ __returns__ the name.
 
 Get language name.
 
-__returns__ the name.
+__returns__ the name
 
 ### Get variant display name
 
@@ -148,7 +148,7 @@ __returns__ the name.
 
 Get variant name.
 
-__returns__ the name.
+__returns__ the name
 
 ### Get country ISO3 code
 
@@ -158,7 +158,7 @@ __returns__ the name.
 
 Get country ISO3 code.
 
-__returns__ the code.
+__returns__ the code
 
 ### Get language ISO3 code
 
@@ -168,7 +168,7 @@ __returns__ the code.
 
 Get language ISO3 code.
 
-__returns__ the code.
+__returns__ the code
 
 
 ##Advanced API
@@ -182,14 +182,14 @@ Digits.localeFactory(language, country, variant, languageISO3,
 		maxFractionDigits, groupingArray, isLeadingDecimalZero, 
 		isAlwaysShowDecimalSymbol, negativeNumberFormat, 
 		positiveNumberFormat, zeroNumberFormat, nAn, 
-		infinity, roundingMode, digitArray);
+		infinity, roundingMode, digitArray)
 ```
 
-Factory method to create a custom locale
+Factory method to create a custom locale.
 
 - _language_ - ISO2 language code
 - _country_ - ISO2 country code
-- _variant_ - variant code
+- _variant_ - ISO2 variant code. Usually and empty string, ""
 - _languageISO3_ - ISO3 language code
 - _countryISO3_ - ISO3 country code
 - _displayLanguage_ - language name
@@ -207,7 +207,7 @@ Factory method to create a custom locale
 - _zeroNumberFormat_ - zero number format. Usually, #
 - _nAn_ - value for not-a-number
 - _infinity_ - value for infinity
-- _roundingMode_ - rounding mode function
+- _roundingMode_ - rounding function to use. See Rounding modes
 - _digitArray_ - how to represent the digits 0-9 as text
 
 __returns__ the new locale
@@ -219,15 +219,15 @@ var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Swed
 ###Define locale
 
 ```
-Digits.define(locale, skipValidation);
+Digits.define(locale, skipValidation)
 ```
 
 Add a new locale.
 
-- _locale_ - the locale to add.
-- _skipValidation_ - optional. Skip locale validation. Default is false.
+- _locale_ - the locale to add
+- _skipValidation_ - optional. Skip locale validation. Default is false
 
-__returns__ 0 on success, 1 on failure.
+__returns__ 0 on success, 1 on failure
 
 ```javascript
 var locale = Digits.localeFactory(...);
@@ -237,11 +237,11 @@ Digits.define(locale);
 ###Set fallback locale
 
 ```
-Digits.setFallbackLocale(locale);
+Digits.setFallbackLocale(locale)
 ```
 
-The fallback locale will be used if language and country code is unknown when calling the _Digits(code)_ constructor
-Default fallback locale is en_US
+The fallback locale will be used if language and country code is unknown when calling the _new Digits(code)_ constructor
+Default fallback locale is en_US.
 
 - _locale_ - the locale to use as fallback
 
@@ -291,8 +291,8 @@ Digits.roundHalfToEven(number)
 Digits.roundHalfToOdd(number)
 ```
 
-These rounding methods should be used when defining custom locales.
+These rounding functions should be used when defining custom locales.
 
 - _number_ - the number to round
 
-__returns__ the rounded number.
+__returns__ the rounded number
