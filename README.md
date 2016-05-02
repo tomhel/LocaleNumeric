@@ -18,6 +18,10 @@ formatted = digits.format(42000);         //formatted = 42 000;
 formatted = digits.format(9999.99, 0, 0); //formatted = 10 000;
 ```
 
+##Locales
+
+View full list of available locales in [locales.md](locales.md)
+
 ##License
 
 MIT
@@ -25,10 +29,6 @@ MIT
 ##Unit tests
 
 This framework is tested using QUnit. The tests can be found in the _tests_ directory.
-
-###Locales
-
-View full list of available locales in [locales.md](locales.md)
 
 ##API
 
@@ -38,9 +38,9 @@ View full list of available locales in [locales.md](locales.md)
 Digits(code)
 ```
 
-Create an instance by passing an ISO2 language and country code.
+Create an instance by passing an ISO2 language/country code to the constructor.
 
-* _code_ - the language and country code.
+* _code_ - the ISO2 language/country code.
 
 ```javascript
 var instance = new Digits("sv_SE");
