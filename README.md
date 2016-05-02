@@ -42,7 +42,7 @@ Examples on how to use digits.js are in the _examples_ directory.
 new Digits(code)
 ```
 
-Create an instance by passing an ISO2 language/country code to the constructor. If the locale does not exist a fallback locale will be returned. Default fallback is en_US (English, United States).
+Create an instance by passing an ISO2 language/country code to the constructor. If the locale does not exist a fallback locale will be used. Default fallback is en_US (English, United States).
 See [locales.md](locales.md) for a full list of available locales.
 
 * _code_ - the ISO2 language/country code.
