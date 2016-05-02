@@ -1,5 +1,5 @@
 # digits.js
-Format numbers to 152 different locales in JavaScript. Besides number formatting it will also handle number rounding according to locale.
+Format numbers to 152 different locales in JavaScript. Besides formatting it will also handle rounding of numbers according to locale.
 
 It is very simple to use, watch:
 
