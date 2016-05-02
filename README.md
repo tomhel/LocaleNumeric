@@ -66,7 +66,7 @@ instance.format(9999.99);       // 9999,99
 instance.format(9999.99, 0, 0); // 10 000
 ```
 
-### Get Locale list
+### Get locale list
 
 ```
 Digits.getCodeList()
@@ -151,7 +151,7 @@ __returns__ the name.
 <instance>.getCountryISO3()
 ```
 
-Get Language ISO3 code.
+Get language ISO3 code.
 
 __returns__ the code.
 
@@ -211,7 +211,7 @@ __returns__ the new locale
 var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
 ```
 
-###Locale define
+###Define locale
 
 ```
 Digits.define(locale, skipValidation);
