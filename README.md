@@ -287,7 +287,7 @@ Digits.roundHalfToEven(number)
 Digits.roundHalfToOdd(number)
 ```
 
-These rounding methods can be used when defining custom locales.
+These rounding methods should be used when defining custom locales.
 
 - _number_ - the number to round
 
