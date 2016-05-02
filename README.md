@@ -116,7 +116,7 @@ __returns__ the code.
 <instance>.getVariant()
 ```
 
-Get variant code.
+Get variant ISO2 code.
 
 __returns__ the code.
 
@@ -196,19 +196,19 @@ Factory method to create a custom locale
 - _displayCountry_ - country name
 - _displayVariant_ - variant name
 - _decimalSymbol_ - the decimal symbol
-- _groupSymbol_ - the group symbol (thousand separator)
-- _minFractionDigits_ - minimum number of fraction digits. Used as default by Digits objects.
-- _maxFractionDigits_ - maximum number of fraction digits. Used as default by Digits objects.
-- _groupingArray_ - defines how to group/seperate digits.
+- _groupSymbol_ - the group symbol (for example, thousand separator)
+- _minFractionDigits_ - minimum number of fraction digits. Used as default by Digits objects
+- _maxFractionDigits_ - maximum number of fraction digits. Used as default by Digits objects
+- _groupingArray_ - defines how to group/seperate digits
 - _isLeadingDecimalZero_ - have leading decimal zero. Example, 0.75 or .75
 - _isAlwaysShowDecimalSymbol_ - always have decimal symbol
 - _negativeNumberFormat_ - negative number format. Example, prefix with minus sign -#
-- _positiveNumberFormat_ - positive number format.
-- _zeroNumberFormat_ - zero number format.
+- _positiveNumberFormat_ - positive number format. Example, no prefix or suffix, #
+- _zeroNumberFormat_ - zero number format. Usually, #
 - _nAn_ - value for not-a-number
 - _infinity_ - value for infinity
-- _roundingMode_ - rounding mode function.
-- _digitArray_ - How to represent the digits 0-9 as text.
+- _roundingMode_ - rounding mode function
+- _digitArray_ - how to represent the digits 0-9 as text
 
 __returns__ the new locale
 
