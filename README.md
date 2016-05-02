@@ -38,7 +38,8 @@ This framework is tested using QUnit. The tests can be found in the _tests_ dire
 Digits(code)
 ```
 
-Create an instance by passing an ISO2 language/country code to the constructor.
+Create an instance by passing an ISO2 language/country code to the constructor. If the locale does not exist a fallback locale will be returned. Default fallback is en_US (English, United States).
+See [locales.md](locales.md) for a full list of available locales.
 
 * _code_ - the ISO2 language/country code.
 
@@ -245,7 +246,7 @@ var fallback = Digits("sv_SE");
 Digits.setFallbackLocale(fallback.locale);
 ```
 
-###Use to ISO3 codes
+###Use ISO3 codes
 
 ```
 Digits.useISO3()
