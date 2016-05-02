@@ -71,25 +71,6 @@ instance.format(9999.99);       // 9999,99
 instance.format(9999.99, 0, 0); // 10 000
 ```
 
-### Get code list
-
-```
-Digits.getCodeList()
-```
-
-Get codes for all available locales.
-
-__returns__ a list containing all available locale codes
-
-
-```javascript
-var codes = Digits.getCodeList();
-var iso2code = codes[0].codeISO2;
-var iso3code = codes[0].codeISO3;
-var language = codes[0].language;
-var country = codes[0].country;
-```
-
 ### Get country code
 
 ```
@@ -172,6 +153,24 @@ __returns__ the code
 
 
 ##Advanced API
+
+### Get code list
+
+```
+Digits.getCodeList()
+```
+
+Get codes for all available locales.
+
+__returns__ a list containing all available locale codes
+
+```javascript
+var codes = Digits.getCodeList();
+var iso2code = codes[0].codeISO2;
+var iso3code = codes[0].codeISO3;
+var language = codes[0].language;
+var country = codes[0].country;
+```
 
 ###Set fallback locale
 
