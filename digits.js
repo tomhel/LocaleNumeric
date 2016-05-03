@@ -839,14 +839,22 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 
 		var fractionInt = parseInt(fractionPart.slice(leadingZeros));
 		fractionInt = fractionInt / Math.pow(10, fractionPart.length - precision);
+		var fractionIntRounded;
 
 		//rounding depends on number sign. negative or positive.
 		if(isNegativeNumber) {
-			fractionInt = -numLocale.numbers.round(-fractionInt);
+			fractionIntRounded = -numLocale.numbers.round(-fractionInt);
 		} else {
-			fractionInt = numLocale.numbers.round(fractionInt);
+			fractionIntRounded = numLocale.numbers.round(fractionInt);
+		}
+		
+		//rounding resulted in left shifted fractions
+		//one less leading zero.
+		if(fractionInt < 10 && fractionIntRounded == 10) {
+			leadingZeros--;
 		}
 
+		fractionInt = fractionIntRounded;
 		var fractionIntString = String(fractionInt);
 
 		fractionPart = "";
