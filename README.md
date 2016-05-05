@@ -83,6 +83,11 @@ Get country name.
 
 __returns__ the name
 
+```javascript
+var instance = new Digits("sv_SE");
+var name = instance.getDisplayCountry(); // name = Sweden
+```
+
 ### Get language display name
 
 ```
@@ -92,6 +97,11 @@ __returns__ the name
 Get language name.
 
 __returns__ the name
+
+```javascript
+var instance = new Digits("sv_SE");
+var name = instance.getDisplayCountry(); // name = Swedish
+```
 
 ### Get variant display name
 
@@ -113,6 +123,11 @@ Get country ISO2 code.
 
 __returns__ the code
 
+```javascript
+var instance = new Digits("sv_SE");
+var code = instance.getCountry(); // code = SE
+```
+
 ### Get language code
 
 ```
@@ -122,6 +137,11 @@ __returns__ the code
 Get language ISO2 code.
 
 __returns__ the code
+
+```javascript
+var instance = new Digits("sv_SE");
+var code = instance.getLanguage(); // code = sv
+```
 
 ### Get variant code
 
@@ -143,6 +163,11 @@ Get country ISO3 code.
 
 __returns__ the code
 
+```javascript
+var instance = new Digits("sv_SE");
+var code = instance.getCountryISO3(); // code = SWE
+```
+
 ### Get language ISO3 code
 
 ```
@@ -153,6 +178,10 @@ Get language ISO3 code.
 
 __returns__ the code
 
+```javascript
+var instance = new Digits("sv_SE");
+var code = instance.getLanguageISO3(); // code = swe
+```
 
 ##Advanced API
 
