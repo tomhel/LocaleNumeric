@@ -2067,7 +2067,7 @@ QUnit.test("format 1000 numbers -0.1 to 0.1 to en_US (United States)", function(
 	assert.equal(digits.format(-0.0045892703779375765), "-0.005");
 });
 
-QUnit.test("format 1000 numbers -1.0 to 1.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -1 to 1 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-0.19032926173909726), "-0.19");
 	assert.equal(digits.format(0.8492072036078149), "0.849");
@@ -3071,7 +3071,7 @@ QUnit.test("format 1000 numbers -1.0 to 1.0 to en_US (United States)", function(
 	assert.equal(digits.format(-0.8074581349858683), "-0.807");
 });
 
-QUnit.test("format 1000 numbers -10.0 to 10.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -10 to 10 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-2.950134444179488), "-2.95");
 	assert.equal(digits.format(4.129416130881756), "4.129");
@@ -4075,7 +4075,7 @@ QUnit.test("format 1000 numbers -10.0 to 10.0 to en_US (United States)", functio
 	assert.equal(digits.format(0.7238421828560337), "0.724");
 });
 
-QUnit.test("format 1000 numbers -100.0 to 100.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -100 to 100 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-48.63718255187186), "-48.637");
 	assert.equal(digits.format(48.5536152248651), "48.554");
@@ -5079,7 +5079,7 @@ QUnit.test("format 1000 numbers -100.0 to 100.0 to en_US (United States)", funct
 	assert.equal(digits.format(62.53575661404281), "62.536");
 });
 
-QUnit.test("format 1000 numbers -1000.0 to 1000.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -1000 to 1000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(19.48033791360899), "19.48");
 	assert.equal(digits.format(411.9489644095038), "411.949");
@@ -6083,7 +6083,7 @@ QUnit.test("format 1000 numbers -1000.0 to 1000.0 to en_US (United States)", fun
 	assert.equal(digits.format(319.588154135585), "319.588");
 });
 
-QUnit.test("format 1000 numbers -10000.0 to 10000.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -10000 to 10000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-5290.323667697991), "-5,290.324");
 	assert.equal(digits.format(9597.548848789102), "9,597.549");
@@ -7087,7 +7087,7 @@ QUnit.test("format 1000 numbers -10000.0 to 10000.0 to en_US (United States)", f
 	assert.equal(digits.format(6355.429407844644), "6,355.429");
 });
 
-QUnit.test("format 1000 numbers -100000.0 to 100000.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -100000 to 100000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-76884.4062485627), "-76,884.406");
 	assert.equal(digits.format(-21372.305606005088), "-21,372.306");
@@ -8091,7 +8091,7 @@ QUnit.test("format 1000 numbers -100000.0 to 100000.0 to en_US (United States)",
 	assert.equal(digits.format(-8558.355760191145), "-8,558.356");
 });
 
-QUnit.test("format 1000 numbers -1000000.0 to 1000000.0 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -1000000 to 1000000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-414150.32229769835), "-414,150.322");
 	assert.equal(digits.format(594532.171857079), "594,532.172");

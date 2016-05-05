@@ -38,19 +38,20 @@
 Digits = function (localeCode) {
 	var locales = Digits.locales();
 
+	//set default fallback locale if not already set
+	if (Digits.fallbackLocaleCode === undefined) {
+		Digits.fallbackLocaleCode = "en_US";
+	}
+
 	if(localeCode === undefined || localeCode === null) {
 		//fallback
-		if(Digits.fallbackLocaleCode !== undefined && Digits.fallbackLocaleCode !== null) {
-			this.locale = locales.get(Digits.fallbackLocaleCode);
-		}
+		this.locale = locales.get(Digits.fallbackLocaleCode);
 	} else {
 		var localeObject = locales.get(localeCode);
 
 		if(localeObject === undefined || localeObject === null) {
 			//fallback
-			if(Digits.fallbackLocaleCode !== undefined && Digits.fallbackLocaleCode !== null) {
-				this.locale = locales.get(Digits.fallbackLocaleCode);
-			}
+			this.locale = locales.get(Digits.fallbackLocaleCode);
 		} else {
 			//success!
 			this.locale = localeObject;
@@ -294,12 +295,14 @@ Digits.localeFactory = function(language, country, variant, languageISO3,
 };
 
 /* Indexing method for locales. Default indexing by ISO2 codes. */
+/* Do not change this directly */
 Digits.indexingMethod = Digits.indexByISO2;
 /* Automatically define locales. false to disable. Default is true. */
+/* Do not change this directly */
 Digits.isAutoDefineEnabled = true;
 /* Fallback locale string. Defaults to "en_US" for ISO2, "eng_USA" for ISO3. */
+/* Do not change this directly */
 Digits.fallbackLocaleCode = undefined;
-
 
 /**
  * Do not load any locales.
@@ -307,13 +310,6 @@ Digits.fallbackLocaleCode = undefined;
  */
 Digits.disableAutoDefine = function() {
 	Digits.isAutoDefineEnabled = false;
-};
-
-/**
- * Load all locales automatically. This is default behaviour.
- */
-Digits.enableAutoDefine = function() {
-	Digits.isAutoDefineEnabled = true;
 };
 
 /**
@@ -325,17 +321,14 @@ Digits.setFallbackLocale = function(localeObject) {
 };
 
 /**
- * Use ISO2 codes when creating new Digits objects (default).
- */
-Digits.useISO2 = function() {
-	Digits.indexingMethod = Digits.indexByISO2;
-};
-
-/**
  * Use ISO3 codes when creating new Digits objects.
  */
 Digits.useISO3 = function() {
 	Digits.indexingMethod = Digits.indexByISO3;
+	//set default fallback locale if not already set
+	if (Digits.fallbackLocaleCode === undefined) {
+		Digits.fallbackLocaleCode = "eng_USA";
+	}
 };
 
 /**
@@ -372,7 +365,7 @@ Digits.formatInternal = function(number, formatPattern) {
 	return numFormatted;
 };
 
-/* Data structure holding defined locales. Locales are defined on first access (lazy). */
+/* Data structure holding defined locales. Locales are defined once on first access (lazy). */
 Digits.locales = function() {
 	/* Contains all locales. */
 	var locales = {};
@@ -486,163 +479,158 @@ Digits.locales = function() {
 
 	//locales are automatically defined if not disabled.
 	if(Digits.isAutoDefineEnabled) {
-		define(Digits.localeFactory("ja", "JP", "", "jpn", "JPN", "Japanese", "Japan", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "PE", "", "spa", "PER", "Spanish", "Peru", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "", "", "eng", "", "English", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ja", "JP", "JP", "jpn", "JPN", "Japanese", "Japan", "JP", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "PA", "", "spa", "PAN", "Spanish", "Panama", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sr", "BA", "", "srp", "BIH", "Serbian", "Bosnia and Herzegovina", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("mk", "", "", "mkd", "", "Macedonian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "GT", "", "spa", "GTM", "Spanish", "Guatemala", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "", "", "ara", "", "Arabic", "", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("ar", "AE", "", "ara", "ARE", "Arabic", "United Arab Emirates", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("no", "NO", "", "nor", "NOR", "Norwegian", "Norway", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sq", "AL", "", "sqi", "ALB", "Albanian", "Albania", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("bg", "", "", "bul", "", "Bulgarian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "IQ", "", "ara", "IRQ", "Arabic", "Iraq", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "YE", "", "ara", "YEM", "Arabic", "Yemen", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("hu", "", "", "hun", "", "Hungarian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("pt", "PT", "", "por", "PRT", "Portuguese", "Portugal", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("el", "CY", "", "ell", "CYP", "Greek", "Cyprus", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "QA", "", "ara", "QAT", "Arabic", "Qatar", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("mk", "MK", "", "mkd", "MKD", "Macedonian", "Macedonia", "", ",", ".", 0, 3, [3], true, false, "(#)", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sv", "", "", "swe", "", "Swedish", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("de", "CH", "", "deu", "CHE", "German", "Switzerland", "", ".", "'", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fi", "FI", "", "fin", "FIN", "Finnish", "Finland", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("is", "", "", "isl", "", "Icelandic", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("cs", "", "", "ces", "", "Czech", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "MT", "", "eng", "MLT", "English", "Malta", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sl", "SI", "", "slv", "SVN", "Slovenian", "Slovenia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sk", "SK", "", "slk", "SVK", "Slovak", "Slovakia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("it", "", "", "ita", "", "Italian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("tr", "TR", "", "tur", "TUR", "Turkish", "Turkey", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("zh", "", "", "zho", "", "Chinese", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("th", "", "", "tha", "", "Thai", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "SA", "", "ara", "SAU", "Arabic", "Saudi Arabia", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("no", "", "", "nor", "", "Norwegian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "GB", "", "eng", "GBR", "English", "United Kingdom", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sr", "CS", "", "srp", "SCG", "Serbian", "Serbia and Montenegro", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("lt", "", "", "lit", "", "Lithuanian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ro", "", "", "ron", "", "Romanian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "NZ", "", "eng", "NZL", "English", "New Zealand", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("no", "NO", "NY", "nor", "NOR", "Norwegian", "Norway", "Nynorsk", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("lt", "LT", "", "lit", "LTU", "Lithuanian", "Lithuania", "", ",", "\u00a0", 0, 2, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "NI", "", "spa", "NIC", "Spanish", "Nicaragua", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("nl", "", "", "nld", "", "Dutch", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ga", "IE", "", "gle", "IRL", "Irish", "Ireland", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fr", "BE", "", "fra", "BEL", "French", "Belgium", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "ES", "", "spa", "ESP", "Spanish", "Spain", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "LB", "", "ara", "LBN", "Arabic", "Lebanon", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ko", "", "", "kor", "", "Korean", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fr", "CA", "", "fra", "CAN", "French", "Canada", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("et", "EE", "", "est", "EST", "Estonian", "Estonia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "KW", "", "ara", "KWT", "Arabic", "Kuwait", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sr", "RS", "", "srp", "SRB", "Serbian", "Serbia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "US", "", "spa", "USA", "Spanish", "United States", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "MX", "", "spa", "MEX", "Spanish", "Mexico", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "SD", "", "ara", "SDN", "Arabic", "Sudan", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("in", "ID", "", "ind", "IDN", "Indonesian", "Indonesia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ru", "", "", "rus", "", "Russian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("lv", "", "", "lav", "", "Latvian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "UY", "", "spa", "URY", "Spanish", "Uruguay", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("lv", "LV", "", "lav", "LVA", "Latvian", "Latvia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("iw", "", "", "heb", "", "Hebrew", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("pt", "BR", "", "por", "BRA", "Portuguese", "Brazil", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "SY", "", "ara", "SYR", "Arabic", "Syria", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("hr", "", "", "hrv", "", "Croatian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("et", "", "", "est", "", "Estonian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "DO", "", "spa", "DOM", "Spanish", "Dominican Republic", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fr", "CH", "", "fra", "CHE", "French", "Switzerland", "", ".", "'", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "VE", "", "spa", "VEN", "Spanish", "Venezuela", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("ar", "BH", "", "ara", "BHR", "Arabic", "Bahrain", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "PH", "", "eng", "PHL", "English", "Philippines", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "TN", "", "ara", "TUN", "Arabic", "Tunisia", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fi", "", "", "fin", "", "Finnish", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("de", "AT", "", "deu", "AUT", "German", "Austria", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "", "", "spa", "", "Spanish", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("nl", "NL", "", "nld", "NLD", "Dutch", "Netherlands", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "EC", "", "spa", "ECU", "Spanish", "Ecuador", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("zh", "TW", "", "zho", "TWN", "Chinese", "Taiwan", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "DZ", "", "ara", "DZA", "Arabic", "Algeria", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "EG", "", "ara", "EGY", "Arabic", "Egypt", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "IQ", "", "ara", "IRQ", "Arabic", "Iraq", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("ar", "JO", "", "ara", "JOR", "Arabic", "Jordan", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "KW", "", "ara", "KWT", "Arabic", "Kuwait", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "LB", "", "ara", "LBN", "Arabic", "Lebanon", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "LY", "", "ara", "LBY", "Arabic", "Libya", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "MA", "", "ara", "MAR", "Arabic", "Morocco", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "OM", "", "ara", "OMN", "Arabic", "Oman", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "QA", "", "ara", "QAT", "Arabic", "Qatar", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "SA", "", "ara", "SAU", "Arabic", "Saudi Arabia", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "SD", "", "ara", "SDN", "Arabic", "Sudan", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "SY", "", "ara", "SYR", "Arabic", "Syria", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "TN", "", "ara", "TUN", "Arabic", "Tunisia", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ar", "YE", "", "ara", "YEM", "Arabic", "Yemen", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("be", "", "", "bel", "", "Belarusian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("is", "IS", "", "isl", "ISL", "Icelandic", "Iceland", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("be", "BY", "", "bel", "BLR", "Belarusian", "Belarus", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("bg", "", "", "bul", "", "Bulgarian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("bg", "BG", "", "bul", "BGR", "Bulgarian", "Bulgaria", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ca", "", "", "cat", "", "Catalan", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ca", "ES", "", "cat", "ESP", "Catalan", "Spain", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("cs", "", "", "ces", "", "Czech", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("cs", "CZ", "", "ces", "CZE", "Czech", "Czech Republic", "", ",", "\u00a0", 0, 2, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("da", "", "", "dan", "", "Danish", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("da", "DK", "", "dan", "DNK", "Danish", "Denmark", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("de", "", "", "deu", "", "German", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("de", "AT", "", "deu", "AUT", "German", "Austria", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("de", "CH", "", "deu", "CHE", "German", "Switzerland", "", ".", "'", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("de", "DE", "", "deu", "DEU", "German", "Germany", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("de", "LU", "", "deu", "LUX", "German", "Luxembourg", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("el", "", "", "ell", "", "Greek", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("el", "CY", "", "ell", "CYP", "Greek", "Cyprus", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("el", "GR", "", "ell", "GRC", "Greek", "Greece", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "", "", "eng", "", "English", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "AU", "", "eng", "AUS", "English", "Australia", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "CA", "", "eng", "CAN", "English", "Canada", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "GB", "", "eng", "GBR", "English", "United Kingdom", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "IE", "", "eng", "IRL", "English", "Ireland", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "IN", "", "eng", "IND", "English", "India", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "MT", "", "eng", "MLT", "English", "Malta", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "NZ", "", "eng", "NZL", "English", "New Zealand", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "PH", "", "eng", "PHL", "English", "Philippines", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "SG", "", "eng", "SGP", "English", "Singapore", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "US", "", "eng", "USA", "English", "United States", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("en", "ZA", "", "eng", "ZAF", "English", "South Africa", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "", "", "spa", "", "Spanish", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "AR", "", "spa", "ARG", "Spanish", "Argentina", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "BO", "", "spa", "BOL", "Spanish", "Bolivia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "CL", "", "spa", "CHL", "Spanish", "Chile", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("es", "CO", "", "spa", "COL", "Spanish", "Colombia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("es", "CR", "", "spa", "CRI", "Spanish", "Costa Rica", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "CL", "", "spa", "CHL", "Spanish", "Chile", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "EG", "", "ara", "EGY", "Arabic", "Egypt", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "ZA", "", "eng", "ZAF", "English", "South Africa", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("th", "TH", "", "tha", "THA", "Thai", "Thailand", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("el", "GR", "", "ell", "GRC", "Greek", "Greece", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("it", "IT", "", "ita", "ITA", "Italian", "Italy", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ca", "", "", "cat", "", "Catalan", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("hu", "HU", "", "hun", "HUN", "Hungarian", "Hungary", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fr", "", "", "fra", "", "French", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "IE", "", "eng", "IRL", "English", "Ireland", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("uk", "UA", "", "ukr", "UKR", "Ukrainian", "Ukraine", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("pl", "PL", "", "pol", "POL", "Polish", "Poland", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fr", "LU", "", "fra", "LUX", "French", "Luxembourg", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("nl", "BE", "", "nld", "BEL", "Dutch", "Belgium", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "IN", "", "eng", "IND", "English", "India", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ca", "ES", "", "cat", "ESP", "Catalan", "Spain", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "MA", "", "ara", "MAR", "Arabic", "Morocco", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "BO", "", "spa", "BOL", "Spanish", "Bolivia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "AU", "", "eng", "AUS", "English", "Australia", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sr", "", "", "srp", "", "Serbian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("zh", "SG", "", "zho", "SGP", "Chinese", "Singapore", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("pt", "", "", "por", "", "Portuguese", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("uk", "", "", "ukr", "", "Ukrainian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "SV", "", "spa", "SLV", "Spanish", "El Salvador", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ru", "RU", "", "rus", "RUS", "Russian", "Russia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ko", "KR", "", "kor", "KOR", "Korean", "South Korea", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("vi", "", "", "vie", "", "Vietnamese", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "DZ", "", "ara", "DZA", "Arabic", "Algeria", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("vi", "VN", "", "vie", "VNM", "Vietnamese", "Vietnam", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sr", "ME", "", "srp", "MNE", "Serbian", "Montenegro", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sq", "", "", "sqi", "", "Albanian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "LY", "", "ara", "LBY", "Arabic", "Libya", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "", "", "ara", "", "Arabic", "", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("zh", "CN", "", "zho", "CHN", "Chinese", "China", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("be", "BY", "", "bel", "BLR", "Belarusian", "Belarus", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("zh", "HK", "", "zho", "HKG", "Chinese", "Hong Kong", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ja", "", "", "jpn", "", "Japanese", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("iw", "IL", "", "heb", "ISR", "Hebrew", "Israel", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("bg", "BG", "", "bul", "BGR", "Bulgarian", "Bulgaria", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("in", "", "", "ind", "", "Indonesian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("mt", "MT", "", "mlt", "MLT", "Maltese", "Malta", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "PY", "", "spa", "PRY", "Spanish", "Paraguay", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sl", "", "", "slv", "", "Slovenian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("fr", "FR", "", "fra", "FRA", "French", "France", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("cs", "CZ", "", "ces", "CZE", "Czech", "Czech Republic", "", ",", "\u00a0", 0, 2, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("it", "CH", "", "ita", "CHE", "Italian", "Switzerland", "", ".", "'", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ro", "RO", "", "ron", "ROU", "Romanian", "Romania", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "PR", "", "spa", "PRI", "Spanish", "Puerto Rico", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "CA", "", "eng", "CAN", "English", "Canada", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("de", "DE", "", "deu", "DEU", "German", "Germany", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ga", "", "", "gle", "", "Irish", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("de", "LU", "", "deu", "LUX", "German", "Luxembourg", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("de", "", "", "deu", "", "German", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("es", "AR", "", "spa", "ARG", "Spanish", "Argentina", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sk", "", "", "slk", "", "Slovak", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ms", "MY", "", "msa", "MYS", "Malay", "Malaysia", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("hr", "HR", "", "hrv", "HRV", "Croatian", "Croatia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("en", "SG", "", "eng", "SGP", "English", "Singapore", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("da", "", "", "dan", "", "Danish", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("mt", "", "", "mlt", "", "Maltese", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("pl", "", "", "pol", "", "Polish", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ar", "OM", "", "ara", "OMN", "Arabic", "Oman", "", ".", ",", 0, 3, [3], true, false, "#-", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("tr", "", "", "tur", "", "Turkish", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("el", "", "", "ell", "", "Greek", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("ms", "", "", "msa", "", "Malay", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
-		define(Digits.localeFactory("da", "DK", "", "dan", "DNK", "Danish", "Denmark", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "DO", "", "spa", "DOM", "Spanish", "Dominican Republic", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "EC", "", "spa", "ECU", "Spanish", "Ecuador", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "ES", "", "spa", "ESP", "Spanish", "Spain", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "GT", "", "spa", "GTM", "Spanish", "Guatemala", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("es", "HN", "", "spa", "HND", "Spanish", "Honduras", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "MX", "", "spa", "MEX", "Spanish", "Mexico", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "NI", "", "spa", "NIC", "Spanish", "Nicaragua", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "PA", "", "spa", "PAN", "Spanish", "Panama", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "PE", "", "spa", "PER", "Spanish", "Peru", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "PR", "", "spa", "PRI", "Spanish", "Puerto Rico", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "PY", "", "spa", "PRY", "Spanish", "Paraguay", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "SV", "", "spa", "SLV", "Spanish", "El Salvador", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "US", "", "spa", "USA", "Spanish", "United States", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "UY", "", "spa", "URY", "Spanish", "Uruguay", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("es", "VE", "", "spa", "VEN", "Spanish", "Venezuela", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("et", "", "", "est", "", "Estonian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("et", "EE", "", "est", "EST", "Estonian", "Estonia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fi", "", "", "fin", "", "Finnish", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fi", "FI", "", "fin", "FIN", "Finnish", "Finland", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fr", "", "", "fra", "", "French", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fr", "BE", "", "fra", "BEL", "French", "Belgium", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fr", "CA", "", "fra", "CAN", "French", "Canada", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fr", "CH", "", "fra", "CHE", "French", "Switzerland", "", ".", "'", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fr", "FR", "", "fra", "FRA", "French", "France", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("fr", "LU", "", "fra", "LUX", "French", "Luxembourg", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ga", "", "", "gle", "", "Irish", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ga", "IE", "", "gle", "IRL", "Irish", "Ireland", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("hi", "IN", "", "hin", "IND", "Hindi", "India", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, ["\u0966","\u0967","\u0968","\u0969","\u096a","\u096b","\u096c","\u096d","\u096e","\u096f"]), true);
+		define(Digits.localeFactory("hr", "", "", "hrv", "", "Croatian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("hr", "HR", "", "hrv", "HRV", "Croatian", "Croatia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("hu", "", "", "hun", "", "Hungarian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("hu", "HU", "", "hun", "HUN", "Hungarian", "Hungary", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("in", "", "", "ind", "", "Indonesian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("in", "ID", "", "ind", "IDN", "Indonesian", "Indonesia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("is", "", "", "isl", "", "Icelandic", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("is", "IS", "", "isl", "ISL", "Icelandic", "Iceland", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("it", "", "", "ita", "", "Italian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("it", "CH", "", "ita", "CHE", "Italian", "Switzerland", "", ".", "'", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("it", "IT", "", "ita", "ITA", "Italian", "Italy", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("iw", "", "", "heb", "", "Hebrew", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("iw", "IL", "", "heb", "ISR", "Hebrew", "Israel", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ja", "", "", "jpn", "", "Japanese", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ja", "JP", "", "jpn", "JPN", "Japanese", "Japan", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ja", "JP", "JP", "jpn", "JPN", "Japanese", "Japan", "JP", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ko", "", "", "kor", "", "Korean", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ko", "KR", "", "kor", "KOR", "Korean", "South Korea", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("lt", "", "", "lit", "", "Lithuanian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("lt", "LT", "", "lit", "LTU", "Lithuanian", "Lithuania", "", ",", "\u00a0", 0, 2, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("lv", "", "", "lav", "", "Latvian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("lv", "LV", "", "lav", "LVA", "Latvian", "Latvia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("mk", "", "", "mkd", "", "Macedonian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("mk", "MK", "", "mkd", "MKD", "Macedonian", "Macedonia", "", ",", ".", 0, 3, [3], true, false, "(#)", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ms", "", "", "msa", "", "Malay", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ms", "MY", "", "msa", "MYS", "Malay", "Malaysia", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("mt", "", "", "mlt", "", "Maltese", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("mt", "MT", "", "mlt", "MLT", "Maltese", "Malta", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("nl", "", "", "nld", "", "Dutch", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("nl", "BE", "", "nld", "BEL", "Dutch", "Belgium", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("nl", "NL", "", "nld", "NLD", "Dutch", "Netherlands", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("no", "", "", "nor", "", "Norwegian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("no", "NO", "", "nor", "NOR", "Norwegian", "Norway", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("no", "NO", "NY", "nor", "NOR", "Norwegian", "Norway", "Nynorsk", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("pl", "", "", "pol", "", "Polish", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("pl", "PL", "", "pol", "POL", "Polish", "Poland", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("pt", "", "", "por", "", "Portuguese", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("pt", "BR", "", "por", "BRA", "Portuguese", "Brazil", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("pt", "PT", "", "por", "PRT", "Portuguese", "Portugal", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ro", "", "", "ron", "", "Romanian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ro", "RO", "", "ron", "ROU", "Romanian", "Romania", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ru", "", "", "rus", "", "Russian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("ru", "RU", "", "rus", "RUS", "Russian", "Russia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sk", "", "", "slk", "", "Slovak", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sk", "SK", "", "slk", "SVK", "Slovak", "Slovakia", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sl", "", "", "slv", "", "Slovenian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sl", "SI", "", "slv", "SVN", "Slovenian", "Slovenia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sq", "", "", "sqi", "", "Albanian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sq", "AL", "", "sqi", "ALB", "Albanian", "Albania", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sr", "", "", "srp", "", "Serbian", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sr", "BA", "", "srp", "BIH", "Serbian", "Bosnia and Herzegovina", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sr", "CS", "", "srp", "SCG", "Serbian", "Serbia and Montenegro", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sr", "ME", "", "srp", "MNE", "Serbian", "Montenegro", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sr", "RS", "", "srp", "SRB", "Serbian", "Serbia", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sv", "", "", "swe", "", "Swedish", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("th", "", "", "tha", "", "Thai", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("th", "TH", "", "tha", "THA", "Thai", "Thailand", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 		define(Digits.localeFactory("th", "TH", "TH", "tha", "THA", "Thai", "Thailand", "TH", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, ["\u0e50","\u0e51","\u0e52","\u0e53","\u0e54","\u0e55","\u0e56","\u0e57","\u0e58","\u0e59"]), true);
-		var locale_en_US = Digits.localeFactory("en", "US", "", "eng", "USA", "English", "United States", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
-		define(locale_en_US, true);
-		if (Digits.fallbackLocaleCode === undefined || Digits.fallbackLocaleCode === null) {
-			//set fallback locale to English, USA.
-			Digits.setFallbackLocale(locale_en_US);
-		}
+		define(Digits.localeFactory("tr", "", "", "tur", "", "Turkish", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("tr", "TR", "", "tur", "TUR", "Turkish", "Turkey", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("uk", "", "", "ukr", "", "Ukrainian", "", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("uk", "UA", "", "ukr", "UKR", "Ukrainian", "Ukraine", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("vi", "", "", "vie", "", "Vietnamese", "", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("vi", "VN", "", "vie", "VNM", "Vietnamese", "Vietnam", "", ",", ".", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("zh", "", "", "zho", "", "Chinese", "", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("zh", "CN", "", "zho", "CHN", "Chinese", "China", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("zh", "HK", "", "zho", "HKG", "Chinese", "Hong Kong", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("zh", "SG", "", "zho", "SGP", "Chinese", "Singapore", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "NaN", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
+		define(Digits.localeFactory("zh", "TW", "", "zho", "TWN", "Chinese", "Taiwan", "", ".", ",", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]), true);
 	}
 
 	Digits.locales = function() {
