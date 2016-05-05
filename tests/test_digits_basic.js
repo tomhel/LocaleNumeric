@@ -208,7 +208,7 @@ QUnit.test("format positive number sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(0.654321, 5, 5), "0,65432");
 	assert.equal(digits.format(0.654321, 6, 6), "0,654321");
 
-	assert.equal(digits.format(0.999999), "1,000");
+	assert.equal(digits.format(0.999999), "1");
 	assert.equal(digits.format(0.999999, 1, 1), "1,0");
 	assert.equal(digits.format(0.999999, 2, 2), "1,00");
 	assert.equal(digits.format(0.999999, 3, 3), "1,000");
@@ -302,7 +302,7 @@ QUnit.test("format negative number sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(-0.654321, 5, 5), "-0,65432");
 	assert.equal(digits.format(-0.654321, 6, 6), "-0,654321");
 
-	assert.equal(digits.format(-0.999999), "-1,000");
+	assert.equal(digits.format(-0.999999), "-1");
 	assert.equal(digits.format(-0.999999, 1, 1), "-1,0");
 	assert.equal(digits.format(-0.999999, 2, 2), "-1,00");
 	assert.equal(digits.format(-0.999999, 3, 3), "-1,000");
@@ -407,7 +407,7 @@ QUnit.test("format positive number en_US (United States)", function(assert) {
 	assert.equal(digits.format(0.654321, 5, 5), "0.65432");
 	assert.equal(digits.format(0.654321, 6, 6), "0.654321");
 
-	assert.equal(digits.format(0.999999), "1.000");
+	assert.equal(digits.format(0.999999), "1");
 	assert.equal(digits.format(0.999999, 1, 1), "1.0");
 	assert.equal(digits.format(0.999999, 2, 2), "1.00");
 	assert.equal(digits.format(0.999999, 3, 3), "1.000");
@@ -501,7 +501,7 @@ QUnit.test("format negative number en_US (United States)", function(assert) {
 	assert.equal(digits.format(-0.654321, 5, 5), "-0.65432");
 	assert.equal(digits.format(-0.654321, 6, 6), "-0.654321");
 
-	assert.equal(digits.format(-0.999999), "-1.000");
+	assert.equal(digits.format(-0.999999), "-1");
 	assert.equal(digits.format(-0.999999, 1, 1), "-1.0");
 	assert.equal(digits.format(-0.999999, 2, 2), "-1.00");
 	assert.equal(digits.format(-0.999999, 3, 3), "-1.000");
@@ -607,7 +607,7 @@ QUnit.test("format positive number ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(0.654321, 5, 5), "0.65432");
 	assert.equal(digits.format(0.654321, 6, 6), "0.654321");
 
-	assert.equal(digits.format(0.999999), "1.000");
+	assert.equal(digits.format(0.999999), "1");
 	assert.equal(digits.format(0.999999, 1, 1), "1.0");
 	assert.equal(digits.format(0.999999, 2, 2), "1.00");
 	assert.equal(digits.format(0.999999, 3, 3), "1.000");
@@ -701,7 +701,7 @@ QUnit.test("format negative number ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(-0.654321, 5, 5), "0.65432-");
 	assert.equal(digits.format(-0.654321, 6, 6), "0.654321-");
 
-	assert.equal(digits.format(-0.999999), "1.000-");
+	assert.equal(digits.format(-0.999999), "1-");
 	assert.equal(digits.format(-0.999999, 1, 1), "1.0-");
 	assert.equal(digits.format(-0.999999, 2, 2), "1.00-");
 	assert.equal(digits.format(-0.999999, 3, 3), "1.000-");

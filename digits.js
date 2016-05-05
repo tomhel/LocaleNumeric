@@ -817,15 +817,7 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 		decimalSymbolIndex = numString.indexOf(".");
 	}
 
-	var zeroPaddedFractionPart = "";
-
-	//padding or rounding of fraction part depending on decided precision.
-	if(fractionPart.length < precision) {
-		//zero padding.
-		for(i = fractionPart.length; i < precision; i++) {
-			zeroPaddedFractionPart+=numLocale.numbers.digits[0];
-		}
-	} else if(fractionPart.length > precision && precision != 0) {
+	if(fractionPart.length > precision && precision != 0) {
 		//fraction part is to long. round it.
 		var leadingZeros = 0;
 		//first, look for leading zeros.
@@ -839,23 +831,17 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 
 		var fractionInt = parseInt(fractionPart.slice(leadingZeros));
 		fractionInt = fractionInt / Math.pow(10, fractionPart.length - precision);
-		var fractionIntRounded;
+		var fractionIntString;
 
 		//rounding depends on number sign. negative or positive.
 		if(isNegativeNumber) {
-			fractionIntRounded = -numLocale.numbers.round(-fractionInt);
+			fractionIntString = String(-numLocale.numbers.round(-fractionInt));
 		} else {
-			fractionIntRounded = numLocale.numbers.round(fractionInt);
+			fractionIntString = String(numLocale.numbers.round(fractionInt));
 		}
 		
-		//rounding resulted in left shifted fractions
-		//one less leading zero.
-		if(fractionInt < 10 && fractionIntRounded == 10) {
-			leadingZeros--;
-		}
-
-		fractionInt = fractionIntRounded;
-		var fractionIntString = String(fractionInt);
+		//if rounding resulted in left shifted fractions we must remove leading zeros.
+		leadingZeros -= (fractionIntString.length - String(Math.floor(fractionInt)).length);
 
 		fractionPart = "";
 
@@ -921,12 +907,28 @@ Digits.prototype.format = function(number, optional_minFractionDigits, optional_
 
 	var numFormattedFractionPart = "";
 
-	//format fraction part using localized digits.
-	for(i = 0; i < fractionPart.length; i++) {
-		numFormattedFractionPart+=numLocale.numbers.digits[fractionPart[i]];
+	if(precision > 0) {
+		precision = 0;
+
+		//format fraction part using localized digits.
+		for(i = fractionPart.length - 1; i >= 0; i--) {
+			//remove trailing zero from fraction part if allowed
+			if(precision == 0 && i >= minFractionDigits && fractionPart.charAt(i) === "0") {
+				continue;
+			}
+			precision++;
+			numFormattedFractionPart = numLocale.numbers.digits[fractionPart.charAt(i)] + numFormattedFractionPart;
+		}
+
+		var trailingZeros = minFractionDigits - numFormattedFractionPart.length;
+
+		//add trailing zeros to fraction part if needed
+		for(i = 0; i < trailingZeros; i++) {
+			precision++;
+			numFormattedFractionPart+=numLocale.numbers.digits[0];
+		}
 	}
 
-	numFormattedFractionPart+=zeroPaddedFractionPart;
 	var formatPattern;
 
 	//decide format pattern: positive, negative or zero.
