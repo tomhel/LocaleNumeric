@@ -22,10 +22,6 @@ View full list of available locales in [locales.md](locales.md)
 
 Locale codes are based on ISO 639 (language) and ISO 3166 (country) standards. 2 letter codes (ISO2) are used by default, but digits.js can be configured to accept 3 letter codes (ISO3) as well.
 
-##License
-
-MIT
-
 ##Tests
 
 This framework is tested using QUnit. Over 10,000 number formatting tests! The tests can be found in the _tests_ directory.
@@ -33,6 +29,10 @@ This framework is tested using QUnit. Over 10,000 number formatting tests! The t
 ##Examples
 
 Examples on how to use digits.js are in the _examples_ directory.
+
+##License
+
+MIT
 
 ##API
 
