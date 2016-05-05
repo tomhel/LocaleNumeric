@@ -26,7 +26,7 @@
  * digits.js - format numbers according to locale
  *
  * Author: Tommy Hellstrom
- * Version: development
+ * Version: 0.2
  *
  */
 
