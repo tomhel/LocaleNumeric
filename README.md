@@ -7,15 +7,13 @@ It is very simple to use, watch:
 
 digits = new Digits("en_US");             // United States
 formatted = digits.format(42);            // formatted = 42
-formatted = digits.format(42.23);         // formatted = 42.23
-formatted = digits.format(69000);         // formatted = 69,000
-formatted = digits.format(9999.99, 0, 0); // formatted = 10,000
+formatted = digits.format(9999.99);       // formatted = 10,000
+formatted = digits.format(500.126, 2, 2); // formatted = 500.13
 
 digits = new Digits("sv_SE");             // Sweden
 formatted = digits.format(42);            // formatted = 42
-formatted = digits.format(42.23);         // formatted = 42,23
-formatted = digits.format(69000);         // formatted = 69 000
-formatted = digits.format(9999.99, 0, 0); // formatted = 10 000
+formatted = digits.format(9999.99);       // formatted = 10 000
+formatted = digits.format(500.126, 2, 2); // formatted = 500,13
 ```
 
 ##Locales
