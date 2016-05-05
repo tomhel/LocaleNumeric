@@ -1125,11 +1125,23 @@ QUnit.test("getLanguageISO3 sv_SE (Sweden)", function(assert) {
 QUnit.test("indexByISO2", function(assert) {
 	var digits = new Digits("sv_SE");
 	assert.equal(Digits.indexByISO2(digits.locale), "sv_SE");
+
+	digits = new Digits("sv");
+	assert.equal(Digits.indexByISO2(digits.locale), "sv");
+
+	digits = new Digits("th_TH_TH");
+	assert.equal(Digits.indexByISO2(digits.locale), "th_TH_TH");
 });
 
 QUnit.test("indexByISO3", function(assert) {
 	var digits = new Digits("sv_SE");
 	assert.equal(Digits.indexByISO3(digits.locale), "swe_SWE");
+
+	digits = new Digits("sv");
+	assert.equal(Digits.indexByISO3(digits.locale), "swe");
+
+	digits = new Digits("th_TH_TH");
+	assert.equal(Digits.indexByISO3(digits.locale), "tha_THA");
 });
 
 QUnit.test("getCodeList", function(assert) {
