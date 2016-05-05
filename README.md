@@ -100,7 +100,7 @@ __returns__ the name
 
 ```javascript
 var instance = new Digits("sv_SE");
-var name = instance.getDisplayCountry(); // name = Swedish
+var name = instance.getDisplayLanguage(); // name = Swedish
 ```
 
 ### Get variant display name
