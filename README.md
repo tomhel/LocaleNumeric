@@ -28,7 +28,7 @@ Locale codes are based on ISO 639 (language) and ISO 3166 (country) standards. 2
 
 MIT
 
-##Unit tests
+##Tests
 
 This framework is tested using QUnit. Over 10,000 number formatting tests! The tests can be found in the _tests_ directory.
 
