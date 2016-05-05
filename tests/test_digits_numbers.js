@@ -5,10 +5,8 @@ QUnit.test("format some numbers to en_US (United States)", function(assert) {
 	assert.equal(digits.format(-7.010232502988785), "-7.01");
 	assert.equal(digits.format(95.00968961616024), "95.01");
 	assert.equal(digits.format(7.001232502988785), "7.001");
-
 	assert.equal(digits.format(95.00968961616024), "95.01");
 	assert.equal(digits.format(95.000968961616024), "95.001");
-
 	assert.equal(digits.format(95.099968961616024), "95.1");
 	assert.equal(digits.format(95.999968961616024), "96");
 	assert.equal(digits.format(99.999968961616024), "100");
@@ -9097,7 +9095,7 @@ QUnit.test("format 1000 numbers -1000000.0 to 1000000.0 to en_US (United States)
 	assert.equal(digits.format(361249.0628877878), "361,249.063");
 });
 
-QUnit.test("format 1000 numbers -1.0E7 to 1.0E7 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -10000000 to 10000000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-9165793.993363136), "-9,165,793.993");
 	assert.equal(digits.format(-7292054.538615538), "-7,292,054.539");
@@ -10101,7 +10099,7 @@ QUnit.test("format 1000 numbers -1.0E7 to 1.0E7 to en_US (United States)", funct
 	assert.equal(digits.format(9756065.170197353), "9,756,065.17");
 });
 
-QUnit.test("format 1000 numbers -1.0E8 to 1.0E8 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -100000000 to 100000000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-1.261795407683377E7), "-12,617,954.077");
 	assert.equal(digits.format(-9147178.996352091), "-9,147,178.996");
@@ -11105,7 +11103,7 @@ QUnit.test("format 1000 numbers -1.0E8 to 1.0E8 to en_US (United States)", funct
 	assert.equal(digits.format(7.800451433224124E7), "78,004,514.332");
 });
 
-QUnit.test("format 1000 numbers -1.0E9 to 1.0E9 to en_US (United States)", function(assert) {
+QUnit.test("format 1000 numbers -1000000000 to 1000000000 to en_US (United States)", function(assert) {
 	var digits = new Digits("en_US");
 	assert.equal(digits.format(-2.2894470009243536E8), "-228,944,700.092");
 	assert.equal(digits.format(5.8948876178905606E7), "58,948,876.179");

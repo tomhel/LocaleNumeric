@@ -289,8 +289,8 @@ Digits.localeFactory = function(language, country, variant, languageISO3,
 				alwaysShowDecimalSymbol:isAlwaysShowDecimalSymbol, negativeNumberFormat:negativeNumberFormat,
 				positiveNumberFormat:positiveNumberFormat, zeroNumberFormat:zeroNumberFormat, nAn:nAn,
 				infinity:infinity, round:roundingMode, digits:digitArray
-			}
-		};
+		}
+	};
 };
 
 /* Indexing method for locales. Default indexing by ISO2 codes. */

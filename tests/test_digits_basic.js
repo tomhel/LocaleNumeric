@@ -1,4 +1,24 @@
 QUnit.test("roundHalfTowardsInfinity", function(assert) {
+	assert.equal(Digits.roundHalfTowardsInfinity(13.95), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.84), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.73), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.62), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.51), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.49), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.38), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.27), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.16), 13);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(12.95), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.84), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.73), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.62), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.51), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.49), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.38), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.27), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.16), 12);
+
 	assert.equal(Digits.roundHalfTowardsInfinity(10), 10);
 	assert.equal(Digits.roundHalfTowardsInfinity(10.5), 11);
 	assert.equal(Digits.roundHalfTowardsInfinity(10.6), 11);
@@ -26,9 +46,49 @@ QUnit.test("roundHalfTowardsInfinity", function(assert) {
 	assert.equal(Digits.roundHalfTowardsInfinity(-9.5), -10);
 	assert.equal(Digits.roundHalfTowardsInfinity(-9.6), -10);
 	assert.equal(Digits.roundHalfTowardsInfinity(-9.4), -9);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.95), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.84), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.73), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.62), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.51), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.49), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.38), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.27), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.16), -12);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.95), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.84), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.73), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.62), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.51), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.49), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.38), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.27), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.16), -13);
 });
 
 QUnit.test("roundHalfTowardsZero", function(assert) {
+	assert.equal(Digits.roundHalfTowardsInfinity(13.95), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.84), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.73), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.62), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.51), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.49), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.38), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.27), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.16), 13);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(12.95), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.84), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.73), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.62), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.51), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.49), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.38), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.27), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.16), 12);
+
 	assert.equal(Digits.roundHalfTowardsZero(10), 10);
 	assert.equal(Digits.roundHalfTowardsZero(10.5), 10);
 	assert.equal(Digits.roundHalfTowardsZero(10.6), 11);
@@ -56,9 +116,49 @@ QUnit.test("roundHalfTowardsZero", function(assert) {
 	assert.equal(Digits.roundHalfTowardsZero(-10.5), -10);
 	assert.equal(Digits.roundHalfTowardsZero(-10.6), -11);
 	assert.equal(Digits.roundHalfTowardsZero(-10.4), -10);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.95), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.84), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.73), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.62), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.51), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.49), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.38), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.27), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.16), -12);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.95), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.84), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.73), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.62), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.51), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.49), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.38), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.27), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.16), -13);
 });
 
 QUnit.test("roundHalfUp", function(assert) {
+	assert.equal(Digits.roundHalfTowardsInfinity(13.95), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.84), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.73), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.62), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.51), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.49), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.38), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.27), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.16), 13);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(12.95), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.84), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.73), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.62), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.51), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.49), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.38), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.27), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.16), 12);
+
 	assert.equal(Digits.roundHalfUp(10), 10);
 	assert.equal(Digits.roundHalfUp(10.5), 11);
 	assert.equal(Digits.roundHalfUp(10.6), 11);
@@ -86,9 +186,49 @@ QUnit.test("roundHalfUp", function(assert) {
 	assert.equal(Digits.roundHalfUp(-10.5), -10);
 	assert.equal(Digits.roundHalfUp(-10.6), -11);
 	assert.equal(Digits.roundHalfUp(-10.4), -10);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.95), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.84), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.73), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.62), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.51), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.49), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.38), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.27), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.16), -12);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.95), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.84), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.73), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.62), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.51), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.49), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.38), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.27), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.16), -13);
 });
 
 QUnit.test("roundHalfDown", function(assert) {
+	assert.equal(Digits.roundHalfTowardsInfinity(13.95), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.84), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.73), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.62), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.51), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.49), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.38), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.27), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.16), 13);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(12.95), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.84), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.73), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.62), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.51), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.49), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.38), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.27), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.16), 12);
+
 	assert.equal(Digits.roundHalfDown(10), 10);
 	assert.equal(Digits.roundHalfDown(10.5), 10);
 	assert.equal(Digits.roundHalfDown(10.6), 11);
@@ -116,9 +256,49 @@ QUnit.test("roundHalfDown", function(assert) {
 	assert.equal(Digits.roundHalfDown(-10.5), -11);
 	assert.equal(Digits.roundHalfDown(-10.6), -11);
 	assert.equal(Digits.roundHalfDown(-10.4), -10);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.95), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.84), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.73), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.62), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.51), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.49), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.38), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.27), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.16), -12);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.95), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.84), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.73), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.62), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.51), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.49), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.38), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.27), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.16), -13);
 });
 
 QUnit.test("roundHalfToEven", function(assert) {
+	assert.equal(Digits.roundHalfTowardsInfinity(13.95), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.84), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.73), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.62), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.51), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.49), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.38), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.27), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.16), 13);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(12.95), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.84), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.73), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.62), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.51), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.49), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.38), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.27), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.16), 12);
+
 	assert.equal(Digits.roundHalfToEven(10), 10);
 	assert.equal(Digits.roundHalfToEven(10.5), 10);
 	assert.equal(Digits.roundHalfToEven(10.6), 11);
@@ -146,9 +326,49 @@ QUnit.test("roundHalfToEven", function(assert) {
 	assert.equal(Digits.roundHalfToEven(-10.5), -10);
 	assert.equal(Digits.roundHalfToEven(-10.6), -11);
 	assert.equal(Digits.roundHalfToEven(-10.4), -10);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.95), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.84), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.73), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.62), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.51), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.49), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.38), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.27), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.16), -12);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.95), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.84), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.73), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.62), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.51), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.49), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.38), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.27), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.16), -13);
 });
 
 QUnit.test("roundHalfToOdd", function(assert) {
+	assert.equal(Digits.roundHalfTowardsInfinity(13.95), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.84), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.73), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.62), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.51), 14);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.49), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.38), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.27), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(13.16), 13);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(12.95), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.84), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.73), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.62), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.51), 13);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.49), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.38), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.27), 12);
+	assert.equal(Digits.roundHalfTowardsInfinity(12.16), 12);
+
 	assert.equal(Digits.roundHalfToOdd(10), 10);
 	assert.equal(Digits.roundHalfToOdd(10.5), 11);
 	assert.equal(Digits.roundHalfToOdd(10.6), 11);
@@ -176,6 +396,26 @@ QUnit.test("roundHalfToOdd", function(assert) {
 	assert.equal(Digits.roundHalfToOdd(-10.5), -11);
 	assert.equal(Digits.roundHalfToOdd(-10.6), -11);
 	assert.equal(Digits.roundHalfToOdd(-10.4), -10);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.95), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.84), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.73), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.62), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.51), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.49), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.38), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.27), -12);
+	assert.equal(Digits.roundHalfTowardsInfinity(-12.16), -12);
+
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.95), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.84), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.73), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.62), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.51), -14);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.49), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.38), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.27), -13);
+	assert.equal(Digits.roundHalfTowardsInfinity(-13.16), -13);
 });
 
 QUnit.test("format NaN & Infinity sv_SE (Sweden)", function(assert) {
@@ -216,6 +456,17 @@ QUnit.test("format positive number sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(0.999999, 5, 5), "1,00000");
 	assert.equal(digits.format(0.999999, 6, 6), "0,999999");
 	assert.equal(digits.format(0.999999, 7, 7), "0,9999990");
+
+	assert.equal(digits.format(5, 9, 9), "5,000000000");
+	assert.equal(digits.format(5.05, 9, 9), "5,050000000");
+	assert.equal(digits.format(5.005, 9, 9), "5,005000000");
+	assert.equal(digits.format(5.0005, 9, 9), "5,000500000");
+	assert.equal(digits.format(5.055, 9, 9), "5,055000000");
+	assert.equal(digits.format(5.0055, 9, 9), "5,005500000");
+	assert.equal(digits.format(5.00055, 9, 9), "5,000550000");
+	assert.equal(digits.format(5.5, 9, 9), "5,500000000");
+	assert.equal(digits.format(5.55, 9, 9), "5,550000000");
+	assert.equal(digits.format(5.555, 9, 9), "5,555000000");
 
 	assert.equal(digits.format(9.98, 0, 0), "10");
 	assert.equal(digits.format(9.98, 1, 1), "10,0");
@@ -310,6 +561,17 @@ QUnit.test("format negative number sv_SE (Sweden)", function(assert) {
 	assert.equal(digits.format(-0.999999, 5, 5), "-1,00000");
 	assert.equal(digits.format(-0.999999, 6, 6), "-0,999999");
 	assert.equal(digits.format(-0.999999, 7, 7), "-0,9999990");
+
+	assert.equal(digits.format(-5, 9, 9), "-5,000000000");
+	assert.equal(digits.format(-5.05, 9, 9), "-5,050000000");
+	assert.equal(digits.format(-5.005, 9, 9), "-5,005000000");
+	assert.equal(digits.format(-5.0005, 9, 9), "-5,000500000");
+	assert.equal(digits.format(-5.055, 9, 9), "-5,055000000");
+	assert.equal(digits.format(-5.0055, 9, 9), "-5,005500000");
+	assert.equal(digits.format(-5.00055, 9, 9), "-5,000550000");
+	assert.equal(digits.format(-5.5, 9, 9), "-5,500000000");
+	assert.equal(digits.format(-5.55, 9, 9), "-5,550000000");
+	assert.equal(digits.format(-5.555, 9, 9), "-5,555000000");
 
 	assert.equal(digits.format(-9.98, 0, 0), "-10");
 	assert.equal(digits.format(-9.98, 1, 1), "-10,0");
@@ -416,6 +678,17 @@ QUnit.test("format positive number en_US (United States)", function(assert) {
 	assert.equal(digits.format(0.999999, 6, 6), "0.999999");
 	assert.equal(digits.format(0.999999, 7, 7), "0.9999990");
 
+	assert.equal(digits.format(5, 9, 9), "5.000000000");
+	assert.equal(digits.format(5.05, 9, 9), "5.050000000");
+	assert.equal(digits.format(5.005, 9, 9), "5.005000000");
+	assert.equal(digits.format(5.0005, 9, 9), "5.000500000");
+	assert.equal(digits.format(5.055, 9, 9), "5.055000000");
+	assert.equal(digits.format(5.0055, 9, 9), "5.005500000");
+	assert.equal(digits.format(5.00055, 9, 9), "5.000550000");
+	assert.equal(digits.format(5.5, 9, 9), "5.500000000");
+	assert.equal(digits.format(5.55, 9, 9), "5.550000000");
+	assert.equal(digits.format(5.555, 9, 9), "5.555000000");
+
 	assert.equal(digits.format(9.98, 0, 0), "10");
 	assert.equal(digits.format(9.98, 1, 1), "10.0");
 	assert.equal(digits.format(9.98, 2, 2), "9.98");
@@ -509,6 +782,17 @@ QUnit.test("format negative number en_US (United States)", function(assert) {
 	assert.equal(digits.format(-0.999999, 5, 5), "-1.00000");
 	assert.equal(digits.format(-0.999999, 6, 6), "-0.999999");
 	assert.equal(digits.format(-0.999999, 7, 7), "-0.9999990");
+
+	assert.equal(digits.format(-5, 9, 9), "-5.000000000");
+	assert.equal(digits.format(-5.05, 9, 9), "-5.050000000");
+	assert.equal(digits.format(-5.005, 9, 9), "-5.005000000");
+	assert.equal(digits.format(-5.0005, 9, 9), "-5.000500000");
+	assert.equal(digits.format(-5.055, 9, 9), "-5.055000000");
+	assert.equal(digits.format(-5.0055, 9, 9), "-5.005500000");
+	assert.equal(digits.format(-5.00055, 9, 9), "-5.000550000");
+	assert.equal(digits.format(-5.5, 9, 9), "-5.500000000");
+	assert.equal(digits.format(-5.55, 9, 9), "-5.550000000");
+	assert.equal(digits.format(-5.555, 9, 9), "-5.555000000");
 
 	assert.equal(digits.format(-9.98, 0, 0), "-10");
 	assert.equal(digits.format(-9.98, 1, 1), "-10.0");
@@ -616,6 +900,17 @@ QUnit.test("format positive number ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(0.999999, 6, 6), "0.999999");
 	assert.equal(digits.format(0.999999, 7, 7), "0.9999990");
 
+	assert.equal(digits.format(5, 9, 9), "5.000000000");
+	assert.equal(digits.format(5.05, 9, 9), "5.050000000");
+	assert.equal(digits.format(5.005, 9, 9), "5.005000000");
+	assert.equal(digits.format(5.0005, 9, 9), "5.000500000");
+	assert.equal(digits.format(5.055, 9, 9), "5.055000000");
+	assert.equal(digits.format(5.0055, 9, 9), "5.005500000");
+	assert.equal(digits.format(5.00055, 9, 9), "5.000550000");
+	assert.equal(digits.format(5.5, 9, 9), "5.500000000");
+	assert.equal(digits.format(5.55, 9, 9), "5.550000000");
+	assert.equal(digits.format(5.555, 9, 9), "5.555000000");
+
 	assert.equal(digits.format(9.98, 0, 0), "10");
 	assert.equal(digits.format(9.98, 1, 1), "10.0");
 	assert.equal(digits.format(9.98, 2, 2), "9.98");
@@ -709,6 +1004,17 @@ QUnit.test("format negative number ar_EG (Egypt)", function(assert) {
 	assert.equal(digits.format(-0.999999, 5, 5), "1.00000-");
 	assert.equal(digits.format(-0.999999, 6, 6), "0.999999-");
 	assert.equal(digits.format(-0.999999, 7, 7), "0.9999990-");
+
+	assert.equal(digits.format(-5, 9, 9), "5.000000000-");
+	assert.equal(digits.format(-5.05, 9, 9), "5.050000000-");
+	assert.equal(digits.format(-5.005, 9, 9), "5.005000000-");
+	assert.equal(digits.format(-5.0005, 9, 9), "5.000500000-");
+	assert.equal(digits.format(-5.055, 9, 9), "5.055000000-");
+	assert.equal(digits.format(-5.0055, 9, 9), "5.005500000-");
+	assert.equal(digits.format(-5.00055, 9, 9), "5.000550000-");
+	assert.equal(digits.format(-5.5, 9, 9), "5.500000000-");
+	assert.equal(digits.format(-5.55, 9, 9), "5.550000000-");
+	assert.equal(digits.format(-5.555, 9, 9), "5.555000000-");
 
 	assert.equal(digits.format(-9.98, 0, 0), "10-");
 	assert.equal(digits.format(-9.98, 1, 1), "10.0-");
