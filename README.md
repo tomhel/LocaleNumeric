@@ -183,7 +183,7 @@ var instance = new Digits("sv_SE");
 var code = instance.getLanguageISO3(); // code = swe
 ```
 
-##Advanced API
+## Advanced API
 
 ### Get code list
 
@@ -203,7 +203,7 @@ var language = codes[0].language;
 var country = codes[0].country;
 ```
 
-###Set fallback locale
+### Set fallback locale
 
 ```
 Digits.setFallbackLocale(locale)
@@ -219,7 +219,7 @@ var fallback = new Digits("sv_SE");
 Digits.setFallbackLocale(fallback.locale);
 ```
 
-###Use ISO3 codes
+### Use ISO3 codes
 
 ```
 Digits.useISO3()
@@ -233,7 +233,7 @@ Digits.useISO3();
 var digits = new Digits("swe_SWE"); //ISO3 code
 ```
 
-###Locale factory method
+### Locale factory method
 
 ```
 Digits.localeFactory(language, country, variant, languageISO3, 
@@ -276,7 +276,7 @@ __returns__ the new locale
 var locale = Digits.localeFactory("sv", "SE", "", "swe", "SWE", "Swedish", "Sweden", "", ",", "\u00a0", 0, 3, [3], true, false, "-#", "#", "#", "\ufffd", "\u221e", Digits.roundHalfToEven, [0,1,2,3,4,5,6,7,8,9]);
 ```
 
-###Define locale
+### Define locale
 
 ```
 Digits.define(locale, skipValidation)
@@ -294,7 +294,7 @@ var locale = Digits.localeFactory(...);
 Digits.define(locale);
 ```
 
-###Disable auto define
+### Disable auto define
 
 ```
 Digits.disableAutoDefine()
@@ -310,7 +310,7 @@ Digits.setFallbackLocale(Digits.localeFactory(...));
 var digits = new Digits("xx_YY");
 ```
 
-###Rounding modes
+### Rounding modes
 
 ```
 Digits.roundHalfTowardsInfinity(number)
